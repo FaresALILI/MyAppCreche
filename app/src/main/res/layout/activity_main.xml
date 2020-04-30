@@ -65,14 +65,14 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button_Parent"
+                android:id="@+id/buttonParent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Je suis un parent" />
 
             <Button
-                android:id="@+id/button_Enseignant"
+                android:id="@+id/butonEnseignant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
