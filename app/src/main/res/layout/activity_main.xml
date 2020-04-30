@@ -24,15 +24,26 @@
             android:layout_height="291dp"
             android:layout_weight="1"
             android:gravity="center|left|end"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:verticalScrollbarPosition="left"
             android:visibility="visible">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/autjentification"
+
+                ></androidx.appcompat.widget.AppCompatImageView>
 
             <TextView
                 android:id="@+id/textView_Entete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
+                android:foregroundGravity="center|center_horizontal"
                 android:gravity="center|center_horizontal|center_vertical"
                 android:inputType="textMultiLine"
                 android:lineSpacingExtra="10sp"
@@ -40,7 +51,7 @@
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display3"
                 android:textColor="@android:color/background_dark"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:visibility="visible"
                 app:autoSizeTextType="uniform"
