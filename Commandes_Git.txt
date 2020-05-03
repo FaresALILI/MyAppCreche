@@ -1,0 +1,120 @@
+												
+													 ## ##     ####	  ##########                  
+												   ## 	  ##	##		  ##				 
+												  ##			##		  ##
+												  ## 			##		  ##				 
+												  ##    ####	##		  ##
+												   ##     ##	##		  ##
+													 ## ###    ####       ##               
+																						 
+#############  version  #############
+git version
+Afficher la version git.
+
+#############  config  #################
+git config --global user.name "[nom]"
+git config --global user.email "[adresse email]"
+git config --list
+Configurer et editer les informations de l'utilisateur pour tous les dépôts locaux
+
+#############  init  ################
+git init
+initialiser un projet git,se positionner dans le repetoir du projet, clic droit >> Git Bash Here
+
+#############  add  #################
+git add Commandes_Git
+git add .
+Ajouter les modification pour faire le commit. utilisé avec deux options soit avec le nom 
+du fichier modifié ou un point (.) pour tt less fichiers.
+
+#############  status  ##############
+git status
+Liste tous les nouveaux fichiers et les fichiers modifiés à commiter
+
+#############  log  #################
+git log
+Affiche l'historique des versions pour la branche courante
+
+############  show  #################
+git show sha1
+Affiche l'historique d'un commit
+
+#############  diff ################
+git diff
+Montre les différences de fichier entre la version indexée et la dernière
+version
+
+#############  commit  ##############
+git commit -m"Ajout du fichier Commandes_Git"
+Permet de prendre une image de l'état du projet avant de pousser 
+
+#############  remote ###############
+git remote add <name> <url>    
+
+Créer une connexion avec un dépôt distant. Après avoir ajouté un dépôt distant,
+vous pourrez utiliser <nom> comme raccourci pratique vers <url> dans d'autres commandes Git.
+
+git remote -v
+Afficher les connexion distantes
+
+git remote rm <name>
+Supprimer la connexion avec le dépôt distant nommé <nom>.
+
+git remote rename <old-name> <new-name>
+Renommer la connexion distante <ancien-nom> en <nouveau-nom>.
+
+#############  push  ################
+git push [alias] [branche]
+git push
+Pousser le commit vers le depôt distant
+
+git push --set-upstream origin ma_branche 
+Céer une branche distante ma_branche
+
+#############  fetch   ##############
+git fetch
+Récupère tout l'historique du dépôt distant.
+
+git fetch --prune 
+Supprimer l'historique des branches distant déja supprimer et visible en local. 
+
+#############  pull  ################
+git pull
+Récupère tout l'historique et les modification du dépôt distant et mis à jours le depôt local.
+
+#############  branch  ##############
+git branch [nom-de-branche]
+Crée une nouvelle branche
+
+git branch
+Liste toutes les branches locales dans le dépôt courant
+
+git checkout [nom-de-branche]
+Bascule sur la branche spécifiée et met à jour le répertoire de travail.
+
+git branch -d [nom-de-branche]
+Supprime la branche spécifiée
+
+git branch -D [nom_de_la_branche]
+Supprimer la branche située sur le dépôt distant.
+
+git merge [nom-de-branche]
+Combine dans la branche courante l'historique de la branche spécifiée
+
+git branch -a 
+Afficher la liste des branches distante et local. 
+
+#############  checkout  ############
+git checkout nom_branche ou id_sha1
+
+#############  merge ################
+git merge [nom-de-depot]/[branche]
+Fusionne la branche du dépôt dans la branche locale courante. 
+
+git merge ma_branche
+exp: faire un merge de la branche ma_branche dans master: se positionner dans master puis faire $ git merge ma_branche 
+
+#############  rebase ###############
+
+#############  restore ###############
+
