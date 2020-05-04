@@ -20,8 +20,6 @@ public class HorsMusiqueActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_hors_musique);
         ListView sp = findViewById(R.id.listViewMusic);
         TextView textView =findViewById(R.id.textViewNomAct);

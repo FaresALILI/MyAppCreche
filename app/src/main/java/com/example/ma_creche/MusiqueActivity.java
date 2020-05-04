@@ -20,7 +20,6 @@ public class MusiqueActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musique);
         this.textViewDuree = findViewById(R.id.textViewDuree);
-
     }
 
 }
