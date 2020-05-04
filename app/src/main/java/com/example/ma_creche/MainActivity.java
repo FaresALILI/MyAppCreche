@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
                this.butonEnseignant= findViewById(R.id.butonEnseignant);
                this.butonParent=findViewById(R.id.buttonParent);
-
+        this.butonParent.setVisibility(View.GONE);
                this.butonParent.setOnClickListener((View v)->{
                  Intent intent= new Intent(this, AuthentificationActivity.class);
                  intent.putExtra("categorie","parent");

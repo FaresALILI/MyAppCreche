@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/textViewNomAct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9BFFC400"
+        android:text="TextView"
+        android:textSize="14dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:visibility="visible"
+        />
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="290dp"
+        android:layout_height="306dp"
+        android:layout_margin="15dp"
+        android:visibility="visible" />
+
+    <ListView
+        android:id="@+id/listViewMusic"
+        android:layout_width="386dp"
+        android:layout_height="191dp"
+        android:layout_margin="15dp"
+        android:visibility="visible"
+        tools:visibility="visible"></ListView>
+
+    <ProgressBar
+        android:id="@+id/progressBarTime"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="107dp"
+        android:background="#FAF5F3"
+        android:max="100"
+        android:progressTint="#FF3D00"
+        android:scrollbarSize="10dp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/textViewDuree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Duree :00 min" />
+</LinearLayout>
