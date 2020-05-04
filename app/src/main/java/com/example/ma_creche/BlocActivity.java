@@ -31,14 +31,27 @@ public class BlocActivity extends AppCompatActivity {
         this.txtDes=findViewById(R.id.textViewDessin);
 
         int i= 2;//2 pour une notification dessin
-        this.btnDes.setBackgroundColor(Color.argb(120,120,120,120));
-        this.btnDes.setBackgroundColor(Color.DKGRAY);
-
+        //this.btnDes.setBackgroundColor(Color.argb(120,120,120,120));
+        this.btnDes.setBackgroundColor(Color.BLUE);
+       // this.btnDes.setBackgroundColor(Color.DKGRAY);
+        this.txtDes.setTextSize(19);
         this.txtDes.setText(this.txtDes.getText()+" (3)");
 
         //Générer une vibration
         Vibrator vib=(Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
         vib.vibrate(2000);
+
+        this.btnDes.setOnClickListener(v->
+        {
+
+                System.out.println("je suis dans la partie dessin enseignant bloc"  );
+                Intent intent = new Intent(this, HorsMusiqueActivity.class);
+                intent.putExtra("categorie", "enseignant");
+                //btnNouveauCour.setVisibility(View.GONE);
+                startActivity(intent);
+
+
+        });
      }
 
 }

@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".BlocActivity"></activity>
-
+        <activity android:name=".HorsMusiqueActivity"></activity>
+        <activity android:name=".MusiqueActivity"></activity>
         <activity android:name=".AuthentificationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
