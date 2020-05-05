@@ -30,7 +30,7 @@ CategirieUser cat;
         setContentView(R.layout.activity_bloc);
         this.btnAct=findViewById(R.id.imageViewActMan);
         this.btnDes=findViewById(R.id.imageViewDessin);
-        btnNouveauCour= findViewById(R.id.buttonNouveauCour);
+        btnNouveauCour= findViewById(R.id.buttonNouveauCours);
         if (cat.categorie.equals("enseignant")) {
             btnNouveauCour.setVisibility(View.VISIBLE);
         }
