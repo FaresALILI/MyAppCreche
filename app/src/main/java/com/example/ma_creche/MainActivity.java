@@ -21,13 +21,11 @@ public class MainActivity extends AppCompatActivity {
         this.butonParent.setOnClickListener((View v)->{
             Intent intent= new Intent(this, AuthentificationActivity.class);
             cat.categorie="parent";
-            //intent.putExtra("categorie","parent");
             startActivity(intent);
         });
         this.butonEnseignant.setOnClickListener((View v)->{
             Intent intent = new Intent(this,AuthentificationActivity.class);
             cat.categorie="enseignant";
-            //intent.putExtra("categorie","enseignant");
             startActivity(intent);
         });
     }

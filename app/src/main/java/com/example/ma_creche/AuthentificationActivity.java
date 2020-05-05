@@ -18,20 +18,12 @@ CategirieUser cat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //reccuperer le paramettre catégorie (enseignant ou parent)
-        //String stringtoBeReceived = getIntent().getExtras().getString("categorie");
-        //cat.categorie=getIntent().getExtras().getString("categorie");
-
-        editlogin=findViewById(R.id.editLogin);
-        editmotpass=findViewById(R.id.editPass);
-
-        System.out.println("je suis dans authentification "+cat.categorie);
         setContentView(R.layout.activity_authentification);
         btnAuth= findViewById(R.id.butonConnect);
         btnAuth.setOnClickListener(v->{
             Intent intent= new Intent(this, BlocActivity.class);
-           // intent.putExtra("categorie",cat.getCategorie());
-
+            editlogin=findViewById(R.id.editLogin);
+            editmotpass=findViewById(R.id.editPass);
             cat.login=editlogin.getText().toString();
             cat.motpass=editmotpass.getText().toString();
 

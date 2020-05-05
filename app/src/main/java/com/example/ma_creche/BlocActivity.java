@@ -27,8 +27,6 @@ CategirieUser cat;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         System.out.println("je suis dans Bloc Activit "+ cat.categorie+"  "+cat.login+"  "+cat.motpass);
-        //reccuperer le paramettre catégorie (enseignant ou parent)
-       // String stringtoBeReceived = getIntent().getExtras().getString("categorie");
         setContentView(R.layout.activity_bloc);
         this.btnAct=findViewById(R.id.imageViewActMan);
         this.btnDes=findViewById(R.id.imageViewDessin);
