@@ -12,10 +12,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ma_creche.utils.CategirieUser;
+
 import java.util.Random;
 
 
 public class BlocActivity extends AppCompatActivity {
+CategirieUser cat;
 
     ImageView btnDes,btnAct,btnMus,btnDiv,btnCal,btnHist;
     TextView txtDes,txtAct,txtMus,txtDiv,txtCal,txtHist;
@@ -23,13 +26,14 @@ public class BlocActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("je suis dans Bloc Activit "+ cat.categorie+"  "+cat.login+"  "+cat.motpass);
         //reccuperer le paramettre catégorie (enseignant ou parent)
-        String stringtoBeReceived = getIntent().getExtras().getString("categorie");
+       // String stringtoBeReceived = getIntent().getExtras().getString("categorie");
         setContentView(R.layout.activity_bloc);
         this.btnAct=findViewById(R.id.imageViewActMan);
         this.btnDes=findViewById(R.id.imageViewDessin);
         btnNouveauCour= findViewById(R.id.buttonNouveauCour);
-        if (stringtoBeReceived.equals("enseignant")) {
+        if (cat.categorie.equals("enseignant")) {
             btnNouveauCour.setVisibility(View.VISIBLE);
         }
         else{
@@ -37,7 +41,7 @@ public class BlocActivity extends AppCompatActivity {
         }
         this.btnDes.setOnClickListener((View v)->
                 {
-                    if (stringtoBeReceived.equals("enseignant")) {
+                    if (cat.categorie.equals("enseignant")) {
                         Intent intent = new Intent(this, AuthentificationActivity.class);
                         intent.putExtra("categorie", "enseignant");
                         startActivity(intent);

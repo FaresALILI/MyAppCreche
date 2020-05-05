@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.ma_creche.utils.CategirieUser;
+
 public class MainActivity extends AppCompatActivity {
     Button butonEnseignant;
     Button butonParent;
+    CategirieUser cat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,12 +20,14 @@ public class MainActivity extends AppCompatActivity {
         this.butonParent=findViewById(R.id.buttonParent);
         this.butonParent.setOnClickListener((View v)->{
             Intent intent= new Intent(this, AuthentificationActivity.class);
-            intent.putExtra("categorie","parent");
+            cat.categorie="parent";
+            //intent.putExtra("categorie","parent");
             startActivity(intent);
         });
         this.butonEnseignant.setOnClickListener((View v)->{
             Intent intent = new Intent(this,AuthentificationActivity.class);
-            intent.putExtra("categorie","enseignant");
+            cat.categorie="enseignant";
+            //intent.putExtra("categorie","enseignant");
             startActivity(intent);
         });
     }
