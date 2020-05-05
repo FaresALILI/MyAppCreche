@@ -2,26 +2,29 @@ package com.example.ma_creche;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.ma_creche.R;
-//import com.example.ma_creche.StorageActivity;
 
+import com.example.ma_creche.utils.CategirieUser;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class HorsMusiqueActivity extends AppCompatActivity {
     ArrayAdapter<String> model;
-    String currentActivity;
-    Thread th;
+    Button btnDecon;
+    CategirieUser cat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hors_musique);
         ListView sp = findViewById(R.id.listViewMusic);
+        this.btnDecon = findViewById(R.id.buttonDeconnexion);
         TextView textView =findViewById(R.id.textViewNomAct);
         ArrayList<String> listMus = new ArrayList<>();
         textView.setText(getIntent().getStringExtra("nomActivity"));
@@ -32,13 +35,13 @@ public class HorsMusiqueActivity extends AppCompatActivity {
        // th.start();
         model = new ArrayAdapter(HorsMusiqueActivity.this, android.R.layout.simple_list_item_activated_1, listMus);
         sp.setAdapter(model);
-/*
-        model.notifyDataSetChanged();
-        sp.setOnItemClickListener((parent, view,  position, id)-> {
-                    currentActivity=sp.getItemAtPosition(position).toString();
-
+        this.btnDecon.setOnClickListener((View v)->
+                {
+                    this.cat.deconnexion();
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                }
         );
-    }*/
     }
 }
 

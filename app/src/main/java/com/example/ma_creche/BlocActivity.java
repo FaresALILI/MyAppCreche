@@ -22,7 +22,8 @@ CategirieUser cat;
 
     ImageView btnDes,btnAct,btnMus,btnDiv,btnCal,btnHist;
     TextView txtDes,txtAct,txtMus,txtDiv,txtCal,txtHist;
-    Button btnNouveauCour;
+    Button btnNouveauCour,btnDecon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,8 @@ CategirieUser cat;
         setContentView(R.layout.activity_bloc);
         this.btnAct=findViewById(R.id.imageViewActMan);
         this.btnDes=findViewById(R.id.imageViewDessin);
+
+        this.btnDecon = findViewById(R.id.buttonDeconnexion);
         btnNouveauCour= findViewById(R.id.buttonNouveauCours);
         if (cat.categorie.equals("enseignant")) {
             btnNouveauCour.setVisibility(View.VISIBLE);
@@ -52,6 +55,15 @@ CategirieUser cat;
 
                 System.out.println("image testttt");
                 });
+
+
+        this.btnDecon.setOnClickListener((View v)->
+        {
+          this.cat.deconnexion();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        );
         this.btnHist=findViewById(R.id.imageViewHist);
         this.btnMus=findViewById(R.id.imageViewMus);
         this.btnCal=findViewById(R.id.imageViewCalcul);
