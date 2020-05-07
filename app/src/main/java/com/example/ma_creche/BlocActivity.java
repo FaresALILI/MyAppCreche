@@ -30,9 +30,13 @@ CategirieUser cat;
         setContentView(R.layout.activity_bloc);
         this.btnAct=findViewById(R.id.imageViewActMan);
         this.btnDes=findViewById(R.id.imageViewDessin);
-        btnNouveauCour= findViewById(R.id.buttonNouveauCours);
+        this.btnNouveauCour= findViewById(R.id.buttonNouveauCours);
         if (cat.categorie.equals("enseignant")) {
-            btnNouveauCour.setVisibility(View.VISIBLE);
+            this.btnNouveauCour.setVisibility(View.VISIBLE);
+            this.btnNouveauCour.setOnClickListener((View v)-> {
+                Intent intent = new Intent(this, EnvoieCoursActivity.class);
+                startActivity(intent);
+            });
         }
         else{
             btnNouveauCour.setVisibility(View.INVISIBLE);
@@ -70,13 +74,10 @@ CategirieUser cat;
 
         this.btnDes.setOnClickListener(v->
         {
-
                 System.out.println("je suis dans la partie dessin enseignant bloc"  );
                 Intent intent = new Intent(this, HorsMusiqueActivity.class);
                 intent.putExtra("categorie", "enseignant");
                 startActivity(intent);
-
-
         });
      }
 

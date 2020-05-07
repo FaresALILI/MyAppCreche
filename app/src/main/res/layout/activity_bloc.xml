@@ -25,13 +25,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="441dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="119dp"
+            android:layout_height="125dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:visibility="visible">
@@ -85,7 +85,7 @@
                     android:layout_width="150dp"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:text="musique"
+                    android:text="Musique"
                     android:textSize="18dp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
@@ -93,14 +93,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="113dp"
+            android:layout_height="145dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="177dp"
-                android:layout_height="113dp"
+                android:layout_height="121dp"
                 android:gravity="center"
 
                 android:orientation="vertical"
@@ -119,14 +119,15 @@
                     android:layout_width="150dp"
                     android:layout_height="30dp"
                     android:gravity="center"
+                    android:text="act Manuelle"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    tools:text="act Manuelle"></TextView>
+                  ></TextView>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="180dp"
-                android:layout_height="113dp"
+                android:layout_height="117dp"
                 android:gravity="center"
 
                 android:orientation="vertical"
@@ -153,7 +154,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="123dp"
+            android:layout_height="145dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:visibility="visible">
@@ -179,9 +180,9 @@
                     android:layout_width="150dp"
                     android:layout_height="30dp"
                     android:gravity="center"
+                    android:text="Divers"
                     android:textSize="18dp"
-                    android:textStyle="bold"
-                    tools:text="Divers"></TextView>
+                    android:textStyle="bold"></TextView>
             </LinearLayout>
 
             <LinearLayout
