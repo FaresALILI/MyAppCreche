@@ -118,3 +118,8 @@ exp: faire un merge de la branche ma_branche dans master: se positionner dans ma
 
 #############  restore ###############
 
+
+############supprimer une branche distante ########################
+git push origin --delete nom_branche_distante
+git fetch
+##########################################################
