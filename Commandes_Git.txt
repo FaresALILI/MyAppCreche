@@ -123,5 +123,7 @@ exp: faire un merge de la branche ma_branche dans master: se positionner dans ma
 
 #############  restore ###############
 
-
+############ Annuler un commit ############
+git reset --hard HEAD~1
+###########################################
 
