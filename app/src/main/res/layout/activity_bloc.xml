@@ -25,11 +25,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-<<<<<<< HEAD
-        android:layout_height="441dp"
-=======
+
         android:layout_height="466dp"
->>>>>>> 283d7b493824f32024d400657482b42b7328914e
         android:gravity="center"
         android:orientation="vertical">
 
@@ -41,8 +38,8 @@
             android:visibility="visible">
 
             <LinearLayout
-                android:layout_width="172dp"
-                android:layout_height="97dp"
+                android:layout_width="176dp"
+                android:layout_height="102dp"
                 android:gravity="center"
 
                 android:orientation="vertical"
@@ -103,22 +100,16 @@
             android:visibility="visible">
 
             <LinearLayout
-<<<<<<< HEAD
-                android:layout_width="177dp"
-                android:layout_height="121dp"
-=======
                 android:layout_width="183dp"
                 android:layout_height="match_parent"
->>>>>>> 283d7b493824f32024d400657482b42b7328914e
                 android:gravity="center"
-
                 android:orientation="vertical"
                 android:visibility="visible">
 
                 <ImageView
                     android:id="@+id/imageViewActMan"
-                    android:layout_width="103dp"
-                    android:layout_height="64dp"
+                    android:layout_width="142dp"
+                    android:layout_height="73dp"
                     android:layout_margin="3dp"
 
                     android:layout_weight="1"
@@ -128,15 +119,15 @@
                     android:layout_width="150dp"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:text="act Manuelle"
+                    android:text="Act manuelle"
                     android:textSize="18dp"
                     android:textStyle="bold"
                   ></TextView>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="180dp"
-                android:layout_height="117dp"
+                android:layout_width="189dp"
+                android:layout_height="145dp"
                 android:gravity="center"
 
                 android:orientation="vertical"
@@ -144,8 +135,8 @@
 
                 <ImageView
                     android:id="@+id/imageViewHist"
-                    android:layout_width="120dp"
-                    android:layout_height="132dp"
+                    android:layout_width="143dp"
+                    android:layout_height="104dp"
                     android:layout_margin="3dp"
 
                     android:layout_weight="1"
@@ -163,15 +154,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-<<<<<<< HEAD
-            android:layout_height="145dp"
-=======
             android:layout_height="114dp"
->>>>>>> 283d7b493824f32024d400657482b42b7328914e
             android:gravity="center"
             android:orientation="horizontal"
             android:visibility="visible">
-
             <LinearLayout
                 android:layout_width="177dp"
                 android:layout_height="109dp"
@@ -199,8 +185,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="180dp"
-                android:layout_height="107dp"
+                android:layout_width="188dp"
+                android:layout_height="97dp"
                 android:gravity="center"
 
                 android:orientation="vertical"
@@ -239,7 +225,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="textVisiblePassword"
-            android:text="Nouveau cour"
+            android:text="Nouveau cours"
             android:visibility="visible" />
 
     </LinearLayout>

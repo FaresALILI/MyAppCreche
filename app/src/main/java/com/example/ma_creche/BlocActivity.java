@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ma_creche.utils.CategirieUser;
 
-import java.util.Random;
 
 
 public class BlocActivity extends AppCompatActivity {
@@ -27,17 +26,13 @@ CategirieUser cat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("je suis dans Bloc Activit "+ cat.categorie+"  "+cat.login+"  "+cat.motpass);
         setContentView(R.layout.activity_bloc);
         this.btnAct=findViewById(R.id.imageViewActMan);
         this.btnDes=findViewById(R.id.imageViewDessin);
-<<<<<<< HEAD
-        this.btnNouveauCour= findViewById(R.id.buttonNouveauCours);
-=======
+
 
         this.btnDecon = findViewById(R.id.buttonDeconnexion);
         btnNouveauCour= findViewById(R.id.buttonNouveauCours);
->>>>>>> 283d7b493824f32024d400657482b42b7328914e
         if (cat.categorie.equals("enseignant")) {
             this.btnNouveauCour.setVisibility(View.VISIBLE);
             this.btnNouveauCour.setOnClickListener((View v)-> {
