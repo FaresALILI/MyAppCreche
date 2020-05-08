@@ -122,8 +122,10 @@ exp: faire un merge de la branche ma_branche dans master: se positionner dans ma
 #############  rebase ###############
 
 #############  restore ###############
+<<<<<<< HEAD
 
 ############ Annuler un commit ############
 git reset --hard HEAD~1
 ###########################################
-
+git restore [chemin vers le fichier qu'on veut restorer pour annuler des modif locales]
+git restore chemin_du_fichier
