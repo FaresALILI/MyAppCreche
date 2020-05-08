@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "27867310959",
+    "firebase_url": "https://gestiondescours-3a919.firebaseio.com",
+    "project_id": "gestiondescours-3a919",
+    "storage_bucket": "gestiondescours-3a919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27867310959:android:cf7710f8319c42402f169a",
+        "android_client_info": {
+          "package_name": "com.example.ma_creche"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27867310959-hd1cqg4ouhrlos5ut69mj0qqpnhrr409.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ma_creche",
+            "certificate_hash": "a16cdf6e92e0c5a3e747579b171c6f909fcb62b1"
+          }
+        },
+        {
+          "client_id": "27867310959-kbp27qqs6lndn7eb6vnedie2smch8f76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8qwE3djy9DslHq1yuHTAHhXU1CrD9yZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27867310959-kbp27qqs6lndn7eb6vnedie2smch8f76.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
