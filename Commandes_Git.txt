@@ -75,8 +75,13 @@ Céer une branche distante ma_branche
 git fetch
 Récupère tout l'historique du dépôt distant.
 
+git push origin --delete nom_branche_distante
+supprimer une branche distante
+
 git fetch --prune 
-Supprimer l'historique des branches distant déja supprimer et visible en local. 
+Met aà jours l'historique des branches distant déja supprimer et visible en local. 
+
+
 
 #############  pull  ################
 git pull

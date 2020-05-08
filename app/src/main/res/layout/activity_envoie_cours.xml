@@ -41,6 +41,7 @@
                         android:id="@+id/checkBoxDessin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:text="Dessin" />
 
                     <RadioButton
@@ -117,11 +118,11 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/buttonDowload"
+                    android:id="@+id/buttonDownload"
                     android:layout_width="4dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Dowload" />
+                    android:text="Download" />
             </LinearLayout>
         </LinearLayout>
 
