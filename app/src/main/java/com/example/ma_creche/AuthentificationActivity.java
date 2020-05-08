@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.ma_creche.utils.CategirieUser;
 
@@ -27,7 +28,10 @@ CategirieUser cat;
             cat.login=editlogin.getText().toString();
             cat.motpass=editmotpass.getText().toString();
 
+            if(!cat.login.isEmpty() &&(!cat.motpass.isEmpty()))
             startActivity(intent);
+            else
+                Toast.makeText(getApplicationContext(), "Veuillez-vous authentifier", Toast.LENGTH_LONG).show();
         });
     }
 }
