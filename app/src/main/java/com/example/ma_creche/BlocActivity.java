@@ -22,7 +22,7 @@ CategirieUser cat;
     ImageView btnDes,btnAct,btnMus,btnDiv,btnCal,btnHist;
     TextView txtDes,txtAct,txtMus,txtDiv,txtCal,txtHist;
     Button btnNouveauCour,btnDecon;
-  Firebase firebase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
