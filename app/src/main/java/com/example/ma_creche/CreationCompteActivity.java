@@ -31,13 +31,35 @@ public class CreationCompteActivity extends AppCompatActivity {
         editPasswordConfirm=findViewById(R.id.editPassConfirm);
 
         this.btnRegister.setOnClickListener(v->{
+            String login=editlogin.getText().toString();
+            String pass=editPassword.getText().toString();
+            String passConfirm=editPasswordConfirm.getText().toString();
 
-            if(TextUtils.isEmpty(editlogin.getText()))
-                this.editlogin.setError();
-            if(!cat.login.isEmpty() &&(!cat.motpass.isEmpty()))
-                startActivity(intent);
-            else
-                Toast.makeText(getApplicationContext(), "Veuillez-vous authentifier", Toast.LENGTH_LONG).show();
+            if(TextUtils.isEmpty(login)) {
+                this.editlogin.setError("le login doit etre renseigné");
+                return;
+            }
+            else if(pass.length()<6){
+                this.editPassword.setError("Au moins 6 caractèreé");
+                return;
+            }
+            else if(!pass.equals(passConfirm)){
+                this.editPasswordConfirm.setError("Les mots de passes doivent etre identiques");
+                return;
+            }
+
+            fireAuth.createUserWithEmailAndPassword(login,pass).addOnCompleteListener(task->{
+                    if(task.isSuccessful()){
+                    Toast.makeText(this,"compte créé",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),BlocActivity.class));
+                    }
+                    else{
+                        Toast.makeText(this,"Erreur lors de la création de votre compte",Toast.LENGTH_SHORT).show();
+
+                    }
+                    }
+
+            )
         });
 
     }
