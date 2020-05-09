@@ -54,12 +54,12 @@ public class CreationCompteActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(),BlocActivity.class));
                     }
                     else{
-                        Toast.makeText(this,"Erreur lors de la création de votre compte",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,"Erreur lors de la création de votre compte"+task.getException(),Toast.LENGTH_SHORT).show();
 
                     }
                     }
 
-            )
+            );
         });
 
     }
