@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,7 +21,7 @@ CategirieUser cat;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentification);
-        btnAuth = findViewById(R.id.butonConnect);
+        btnAuth = findViewById(R.id.butonbtnRegister);
         textCreateAccount = findViewById(R.id.textViewCreateAccount);
         btnAuth.setOnClickListener(v->{
             Intent intent= new Intent(this, BlocActivity.class);
