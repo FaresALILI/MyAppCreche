@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ma_creche.utils.CategirieUser;
@@ -18,6 +19,7 @@ Button btnAuth;
 EditText editlogin;
 EditText editmotpass;
 TextView textCreateAccount;
+TextView  textViewReinitPassword;
 CategirieUser cat;
 FirebaseAuth fireAuth;
 
@@ -28,6 +30,8 @@ FirebaseAuth fireAuth;
         fireAuth = FirebaseAuth.getInstance();
         btnAuth = findViewById(R.id.butonbtnRegister);
         textCreateAccount = findViewById(R.id.textViewCreateAccount);
+        textViewReinitPassword = findViewById(R.id.textViewReinitPassword);
+
         btnAuth.setOnClickListener(v->{
             Intent intent= new Intent(this, BlocActivity.class);
             editlogin=findViewById(R.id.editLogin);
@@ -54,8 +58,8 @@ FirebaseAuth fireAuth;
                     Toast.makeText(this,"Connexion réusie",Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
-                else
-                    Toast.makeText(this,"Connexion échouée",Toast.LENGTH_SHORT).show();
+          }).addOnFailureListener(e->{
+                Toast.makeText(this,"Connexion échouée"+e.getStackTrace(),Toast.LENGTH_SHORT).show();
             });
 
         });
@@ -64,6 +68,29 @@ FirebaseAuth fireAuth;
         textCreateAccount.setOnClickListener(v->{
             Intent intent= new Intent(this, CreationCompteActivity.class);
                 startActivity(intent);
+        });
+
+        //Réinitialisation du mot de passe
+        textViewReinitPassword.setOnClickListener(v->{
+            EditText resetEmail = new EditText(v.getContext());
+            AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+            passwordResetDialog.setTitle("Réinitialiser votre mot de passe ?");
+            passwordResetDialog.setMessage("Entrer l'adresse mail pour recevoir un lien de réinitialisation");
+            passwordResetDialog.setView(resetEmail);
+            passwordResetDialog.setPositiveButton("oui", (dialog,  which)-> {
+                String mail = resetEmail.getText().toString();
+                fireAuth.sendPasswordResetEmail(mail).addOnSuccessListener(v1->{
+                    Toast.makeText(AuthentificationActivity.this,"Un lien vient d'etre envoyé sur votre boite mail",Toast.LENGTH_LONG);
+
+                }).addOnFailureListener(e->{
+                    Toast.makeText(AuthentificationActivity.this,"Probleme lors de l'envoi du lien de rééinitialisation du mot de passe",Toast.LENGTH_LONG);
+
+                });
+            });
+            passwordResetDialog.setNegativeButton("non",(dialog, which)-> {
+
+            });
+            passwordResetDialog.create().show();
         });
     }
 }

@@ -56,7 +56,6 @@ CategirieUser cat;
                         startActivity(intent);
                     }
 
-                System.out.println("image testttt");
                 });
 
 

@@ -18,6 +18,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
     Button btnEnvoiCours;
     CategirieUser cat;
     EditText editTextDesc;
+    FirebaseAuth fireAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +26,9 @@ public class EnvoieCoursActivity extends AppCompatActivity {
         this.editTextDesc = findViewById(R.id.editTextDescription);
         this. btnDecon= findViewById(R.id.buttonDeconnexion);
         this.btnEnvoiCours =  findViewById(R.id.buttonEnvoyer);
+
+        fireAuth = FirebaseAuth.getInstance();
+        System.out.println(fireAuth.getCurrentUser().getEmail());
 
 
         this.btnEnvoiCours.setOnClickListener(v->{
