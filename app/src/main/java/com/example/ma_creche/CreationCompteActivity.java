@@ -68,6 +68,7 @@ public class CreationCompteActivity extends AppCompatActivity {
                     this.userID = fireAuth.getCurrentUser().getUid();
 
                     //Enregistrement en base de données
+                        firestore =FirebaseFirestore.getInstance();
                     DocumentReference documentRef =firestore.collection("users").document(userID);
                     Map<String,Object> user= new HashMap<>();
                     user.put("email",login);
