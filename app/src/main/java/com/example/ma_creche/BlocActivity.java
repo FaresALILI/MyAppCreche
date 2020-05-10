@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ma_creche.utils.CategirieUser;
-
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class BlocActivity extends AppCompatActivity {
@@ -62,7 +62,8 @@ CategirieUser cat;
 
         this.btnDecon.setOnClickListener((View v)->
         {
-          this.cat.deconnexion();
+          //this.cat.deconnexion();
+            FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }

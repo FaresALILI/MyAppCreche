@@ -34,6 +34,8 @@ public class CreationCompteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creation_compte);
         fireAuth = FirebaseAuth.getInstance();
+        firestore =FirebaseFirestore.getInstance();
+
         //Recupération de la saisie
         btnRegister = findViewById(R.id.butonbtnRegister);
         editlogin=findViewById(R.id.editLogin);
@@ -68,18 +70,18 @@ public class CreationCompteActivity extends AppCompatActivity {
                     this.userID = fireAuth.getCurrentUser().getUid();
 
                     //Enregistrement en base de données
-                        firestore =FirebaseFirestore.getInstance();
                     DocumentReference documentRef =firestore.collection("users").document(userID);
                     Map<String,Object> user= new HashMap<>();
                     user.put("email",login);
                     user.put("password",pass);
                     user.put("date_creation",new Date());
                     documentRef.set(user).addOnSuccessListener(x->{
-
                        Log.d("TAG","utilisateur a été enregistré en base"+ userID);
                         startActivity(new Intent(getApplicationContext(),BlocActivity.class));
-
-                    });
+                    }).addOnFailureListener(e->{
+                        Log.d("TAG","erreur lors de l'authentificatione"+ e.getStackTrace());
+                            }
+                            );
                     }
                     else{
                         Toast.makeText(this,"Erreur lors de la création de votre compte"+task.getException(),Toast.LENGTH_SHORT).show();
