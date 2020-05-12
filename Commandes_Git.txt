@@ -111,6 +111,10 @@ Afficher la liste des branches distante et local.
 
 #############  checkout  ############
 git checkout nom_branche ou id_sha1
+se positionner sur la nouvelle branche
+
+git checkout -b branch_authentification
+créer et se positionner sur une branche au mme temps
 
 #############  merge ################
 git merge [nom-de-depot]/[branche]

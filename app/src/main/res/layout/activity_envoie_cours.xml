@@ -108,21 +108,29 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
+
+                <Button
+                    android:id="@+id/buttonUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Upload" />
+
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textViewNotification"
                     android:layout_width="124dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center|right"
-                    android:text="Pièce jointe  "
+                    android:text="Aucune selection "
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/buttonDownload"
-                    android:layout_width="4dp"
+                    android:id="@+id/buttonSelectFile"
+                    android:layout_width="136dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Download" />
+                    android:text="Pièce jointe" />
             </LinearLayout>
         </LinearLayout>
 
