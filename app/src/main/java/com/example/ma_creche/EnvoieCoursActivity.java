@@ -39,7 +39,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
     Uri pdfUri;//Les Uri sont en fait des URL destinées au stockage local.
     FirebaseStorage storage;
     StorageReference reference;
-    FirebaseDatabase database;
+   // FirebaseDatabase database;
     ProgressDialog progressDialog;
     InputStream image;
     private static final int PICK_FILE=1;
@@ -58,7 +58,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
         this.btnSelectFile =  findViewById(R.id.buttonSelectFile);
 
         storage= FirebaseStorage.getInstance();//return une instance de firebase storage
-        database=FirebaseDatabase.getInstance();//return une instance de firebase Database
+       // database=FirebaseDatabase.getInstance();//return une instance de firebase Database
 
         this.btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,21 +124,27 @@ public class EnvoieCoursActivity extends AppCompatActivity {
         intent.setType("*/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(intent,PICK_FILE);
+        System.out.println("test dans select");
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("etap1");
         if (requestCode==PICK_FILE){
+            System.out.println("etap2");
             if(resultCode==RESULT_OK){
-                if (data.getClipData() != null){
+                System.out.println("etap3");
+                if (data.getClipData()!= null){
                     int count=data.getClipData().getItemCount();
+                    System.out.println("cout: "+count);
                     int i=0;
                     while (i<count){
                         Uri File=data.getClipData().getItemAt(i).getUri();
                         FilList.add(File);
                         i++;
                     }
+                    System.out.println("test dans onActivity");
                     Toast.makeText(this,"You have selected "+ FilList.size()+" Files", Toast.LENGTH_LONG).show();
 
                 }
@@ -148,11 +154,14 @@ public class EnvoieCoursActivity extends AppCompatActivity {
 
     public void uploadFile(View view){
         progressDialog.show();
+        System.out.println("test dans upload");
         Toast.makeText(this,"if takes time , you can press Again",Toast.LENGTH_SHORT).show();
-        for (int j=0;j>FilList.size();j++){
+        System.out.println("mytest:  "+FilList.size());
+        for (int j=0;j<FilList.size();j++){
             Uri PerFile=FilList.get(j);
             StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche");
             StorageReference filename=folder.child("file"+PerFile.getLastPathSegment());
+            System.out.println("montest:  "+PerFile.toString());
             filename.putFile(PerFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -163,6 +172,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
                             HashMap<String,String> hashMap=new HashMap<>();
                             hashMap.put("link",String.valueOf(uri));
                             databaseReference.push().setValue(hashMap);
+                            System.out.println("test dans upload");
                             progressDialog.dismiss();
                             FilList.clear();
                         }
