@@ -34,6 +34,10 @@ Liste tous les nouveaux fichiers et les fichiers modifiés à commiter
 #############  log  #################
 git log
 Affiche l'historique des versions pour la branche courante
+git log --oneline
+Affiche l'historique de façon plius lisible
+git log --graph
+Affiche l'historique sous forme de graphe
 
 ############  show  #################
 git show sha1
