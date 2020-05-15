@@ -10,6 +10,8 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,13 +35,15 @@ public class EnvoieCoursActivity extends AppCompatActivity {
     Button btnEnvoiCours;
     Button btnSelectFile;
     Button btnUpload;
+    RadioGroup typeActivity;
+    RadioButton selectedActivity;
     CategirieUser cat;
     EditText editTextDesc;
     TextView txtVwNotification;
     Uri pdfUri;//Les Uri sont en fait des URL destinées au stockage local.
     FirebaseStorage storage;
     StorageReference reference;
-   // FirebaseDatabase database;
+   FirebaseDatabase database;
     ProgressDialog progressDialog;
     InputStream image;
     private static final int PICK_FILE=1;
@@ -56,13 +60,19 @@ public class EnvoieCoursActivity extends AppCompatActivity {
         this.btnEnvoiCours =  findViewById(R.id.buttonEnvoyer);
         this.btnUpload =  findViewById(R.id.buttonUpload);
         this.btnSelectFile =  findViewById(R.id.buttonSelectFile);
+        this.typeActivity =  findViewById(R.id.typeActivity);
+        int radioId= typeActivity.getCheckedRadioButtonId();
+        this.selectedActivity =findViewById(radioId);
+       System.out.println("activité selectionnée:" +selectedActivity.getText());
 
         storage= FirebaseStorage.getInstance();//return une instance de firebase storage
-       // database=FirebaseDatabase.getInstance();//return une instance de firebase Database
+        database=FirebaseDatabase.getInstance();//return une instance de firebase Database
 
-        this.btnSelectFile.setOnClickListener(new View.OnClickListener() {
+
+        btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("test dans avant selectFile");
                 selectFile(v);
 
             }
@@ -89,6 +99,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
             }
             else{
                 //Envoi du cours ....
+
             }
         });
 
@@ -119,8 +130,15 @@ public class EnvoieCoursActivity extends AppCompatActivity {
         downloadManager.enqueue(request);
     }*/
 
+    public void checkButton(View view){
+        int radioId= typeActivity.getCheckedRadioButtonId();
+        selectedActivity =findViewById(radioId);
+    }
+
     public void selectFile(View view){
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+        checkButton(view);
+        System.out.println("test dans selectFile:"+selectedActivity.getText());
         intent.setType("*/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(intent,PICK_FILE);
@@ -141,6 +159,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
                     int i=0;
                     while (i<count){
                         Uri File=data.getClipData().getItemAt(i).getUri();
+                        System.out.println("test dat:"+data);
                         FilList.add(File);
                         i++;
                     }
@@ -154,13 +173,16 @@ public class EnvoieCoursActivity extends AppCompatActivity {
 
     public void uploadFile(View view){
         progressDialog.show();
-        System.out.println("test dans upload");
         Toast.makeText(this,"if takes time , you can press Again",Toast.LENGTH_SHORT).show();
         System.out.println("mytest:  "+FilList.size());
         for (int j=0;j<FilList.size();j++){
             Uri PerFile=FilList.get(j);
-            StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche");
-            StorageReference filename=folder.child("file"+PerFile.getLastPathSegment());
+            System.out.println("test dans upload:  "+ selectedActivity.getText().toString());
+            String storage=selectedActivity.getText().toString();
+            StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche").child(selectedActivity.getText().toString());
+            //StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche").child(selectedActivity.getText().toString().child("semaine courante"));
+            // StorageReference filename=folder.child(selectedActivity.getText().toString()+System.currentTimeMillis());
+            StorageReference filename=folder.child(selectedActivity.getText().toString()+PerFile.getLastPathSegment());
             System.out.println("montest:  "+PerFile.toString());
             filename.putFile(PerFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -168,13 +190,31 @@ public class EnvoieCoursActivity extends AppCompatActivity {
                     filename.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+                            Uri uri1=taskSnapshot.getUploadSessionUri();
+
+                            System.out.println("test dans onSuccess 1  "+uri1);
+
+                            //*************
+                            String uri2 [] =uri1.toString().split("/o");
+                            System.out.println(uri2[0]+"******* splittt**********"+uri2[1]);
+                            String uri3 [] =uri2[1].toString().split("&upload_id");
+                            System.out.println(uri3[0]);
+                            System.out.println(uri3[1]);
+                            String monlien= uri2[0]+"/"+uri3[1]+"?alt=media";
+                            System.out.println(monlien);
+                            //*****
                             DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("user");
+                            System.out.println("test dans onSuccess 2  ");
                             HashMap<String,String> hashMap=new HashMap<>();
-                            hashMap.put("link",String.valueOf(uri));
+                            System.out.println("test dans onSuccess 3  ");
+                            hashMap.put("link",String.valueOf(uri1));
+                            //ajouter la description
+                            System.out.println("test dans onSuccess 4  ");
                             databaseReference.push().setValue(hashMap);
-                            System.out.println("test dans upload");
+                            System.out.println("test dans onSuccess 5  ");
                             progressDialog.dismiss();
                             FilList.clear();
+                            System.out.println("test dans onSuccess 6  ");
                         }
                     });
                 }

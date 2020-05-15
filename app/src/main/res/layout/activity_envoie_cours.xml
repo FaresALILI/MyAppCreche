@@ -34,6 +34,7 @@
                 android:orientation="horizontal">
 
                 <RadioGroup
+                    android:id="@+id/typeActivity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -54,7 +55,7 @@
                         android:id="@+id/checkBoxActiviteManuelle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Activité Manuelle" />
+                        android:text="Act_Manuelle" />
 
                     <RadioButton
                         android:id="@+id/checkBoxHistoire"
