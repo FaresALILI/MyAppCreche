@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ma_creche.dao.FichierDistant;
 import com.example.ma_creche.utils.CategirieUser;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -142,12 +144,14 @@ public class EnvoieCoursActivity extends AppCompatActivity {
                     filename.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+                            System.out.println("extension = "+PerFile.getLastPathSegment());
                             DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("user");
-                            HashMap<String,String> hashMap=new HashMap<>();
-                            hashMap.put("link",String.valueOf(uri));
-                            hashMap.put("description", String.valueOf(editTextDesc.getText()));
-                            hashMap.put("typeActivity", String.valueOf(selectedActivity.getText()));
-                            hashMap.put("extFile", String.valueOf(PerFile.getLastPathSegment()));
+                            HashMap<String, FichierDistant> hashMap=new HashMap<>();
+                            FichierDistant file = new FichierDistant(String.valueOf(uri),
+                                                                    String.valueOf(editTextDesc.getText()),
+                                                                    String.valueOf(selectedActivity.getText()),
+                                                                    String.valueOf(PerFile.getLastPathSegment()));
+                            hashMap.put("fichier",file);
                             databaseReference.push().setValue(hashMap);
                             progressDialog.dismiss();
                             FilList.clear();
