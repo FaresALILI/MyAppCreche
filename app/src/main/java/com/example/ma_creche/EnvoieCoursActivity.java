@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ma_creche.dao.FichierDistant;
 import com.example.ma_creche.utils.CategirieUser;
+import com.example.ma_creche.utils.StorageUtils;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,8 +24,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 public class EnvoieCoursActivity extends AppCompatActivity {
@@ -41,6 +40,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private static final int PICK_FILE=1;
     ArrayList<Uri> FilList=new ArrayList<Uri>();
+    StorageUtils storageUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +49,13 @@ public class EnvoieCoursActivity extends AppCompatActivity {
         progressDialog.setMessage("Processing Please Wait.....");
         this.editTextDesc = findViewById(R.id.editTextDescription);
         this. btnDecon= findViewById(R.id.buttonDeconnexion);
-        this.btnEnvoiCours =  findViewById(R.id.buttonEnvoyer);
+        this.btnEnvoiCours =  findViewById(R.id.buttonVlider);
         this.btnUpload =  findViewById(R.id.buttonUpload);
         this.btnSelectFile =  findViewById(R.id.buttonSelectFile);
         this.typeActivity =  findViewById(R.id.typeActivity);
         int radioId= typeActivity.getCheckedRadioButtonId();
         this.selectedActivity =findViewById(radioId);
-
+        storageUtils =new StorageUtils();
         btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,14 +120,6 @@ public class EnvoieCoursActivity extends AppCompatActivity {
         }
     }
 
-    public String hebdodate() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        int mondayNo = c.get(Calendar.DAY_OF_MONTH)-c.get(Calendar.DAY_OF_WEEK)+2;
-        c.set(Calendar.DAY_OF_MONTH,mondayNo);
-        int d=c.get(c.MONTH)+1;
-        return c.get(Calendar.DAY_OF_MONTH)+"_"+d+"_"+c.get(Calendar.YEAR);
-    }
     public void uploadFile(View view){
         progressDialog.show();
         Toast.makeText(this,"if takes time , you can press Again",Toast.LENGTH_SHORT).show();
@@ -135,7 +127,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
             Uri PerFile=FilList.get(j);
             String storage=selectedActivity.getText().toString();
             //StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche").child(selectedActivity.getText().toString());
-            StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche").child(selectedActivity.getText().toString()).child(hebdodate());
+            StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche").child(selectedActivity.getText().toString()).child(storageUtils.hebdodate());
             // StorageReference filename=folder.child(selectedActivity.getText().toString()+System.currentTimeMillis());
             StorageReference filename=folder.child(selectedActivity.getText().toString()+PerFile.getLastPathSegment());
             filename.putFile(PerFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

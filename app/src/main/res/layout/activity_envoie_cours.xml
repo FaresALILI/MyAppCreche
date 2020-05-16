@@ -140,7 +140,7 @@
             android:layout_height="56dp">
 
             <Button
-                android:id="@+id/buttonEnvoyer"
+                android:id="@+id/buttonVlider"
                 android:layout_width="286dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

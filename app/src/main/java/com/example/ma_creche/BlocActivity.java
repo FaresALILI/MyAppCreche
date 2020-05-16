@@ -89,6 +89,7 @@ CategirieUser cat;
                 System.out.println("je suis dans la partie dessin enseignant bloc"  );
                 Intent intent = new Intent(this, HorsMusiqueActivity.class);
                 intent.putExtra("categorie", "enseignant");
+                intent.putExtra("activite", "dessin");
                 startActivity(intent);
         });
      }
