@@ -28,7 +28,12 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class EnvoieCoursActivity extends AppCompatActivity {
-
+int PDF=0;
+int DOCX =1;
+int AUDIO=2;
+    int VIDEO= 3;
+    Uri uri;
+StorageReference mStorage;
     Button btnDecon;
     Button btnEnvoiCours;
     Button btnSelectFile;
@@ -55,7 +60,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
         this.typeActivity =  findViewById(R.id.typeActivity);
         int radioId= typeActivity.getCheckedRadioButtonId();
         this.selectedActivity =findViewById(radioId);
-
+        mStorage = FirebaseStorage.getInstance().getReference("Uploads");
         btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,27 +101,62 @@ public class EnvoieCoursActivity extends AppCompatActivity {
     public void selectFile(View view){
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         checkButton(view);
-        intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(intent,PICK_FILE);
+        intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent,"select pdf"),PDF);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==PICK_FILE){
-            if(resultCode==RESULT_OK){
-                if (data.getClipData()!= null){
-                    int count=data.getClipData().getItemCount();
-                    int i=0;
-                    while (i<count){
-                        Uri File=data.getClipData().getItemAt(i).getUri();
-                        FilList.add(File);
-                        i++;
-                    }
-                    Toast.makeText(this,"You have selected "+ FilList.size()+" Files", Toast.LENGTH_LONG).show();
+        if(resultCode==RESULT_OK){
+        if (requestCode==PDF){
+                if (data.getData()!= null){
+                uri=data.getData();
+                System.out.println(uri.toString());
+                upload();
                 }
+           else if (requestCode==DOCX){
+                if (data.getData()!= null){
+                    uri=data.getData();
+                    System.out.println(uri.toString());
+                    upload();
+                }
+               else if (requestCode==AUDIO) {
+                    if (data.getData() != null) {
+                        uri = data.getData();
+                        System.out.println(uri.toString());
+                        upload();
+                    } else if (requestCode == VIDEO) {
+                        if (data.getData() != null) {
+                            uri = data.getData();
+                            System.out.println(uri.toString());
+                            upload();
+                        }
+                    }
+                }
+           }
             }
+        }
+    }
+
+    private void upload() {
+        System.out.println("je suis upload");
+        StorageReference folder=mStorage.child(uri.getLastPathSegment());
+        try{
+        folder.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                     @Override
+                                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                         System.out.println("je suis ici dans le succcess");
+                                                       uri = taskSnapshot.getUploadSessionUri();
+                                                         System.out.println(uri.toString());
+
+                                                     }
+                                                 }
+            );
+    }catch(Exception e)
+        {
+            System.out.println("  System.out.println(\"je suis ici dans le ko\");"+e.getStackTrace());
         }
     }
 
