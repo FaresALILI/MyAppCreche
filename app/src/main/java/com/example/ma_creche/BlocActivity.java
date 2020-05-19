@@ -37,6 +37,7 @@ CategirieUser cat;
             this.btnNouveauCour.setVisibility(View.VISIBLE);
             this.btnNouveauCour.setOnClickListener((View v)-> {
                 Intent intent = new Intent(this, EnvoieCoursActivity.class);
+                System.out.println("test dans btnNouveauCour ");
                 startActivity(intent);
             });
         }
