@@ -31,10 +31,7 @@ public class HorsMusiqueActivity extends AppCompatActivity {
         ListView sp = (ListView) findViewById(R.id.listViewMusic);
         this.btnDecon = findViewById(R.id.buttonDeconnexion);
         TextView textView =findViewById(R.id.textViewNomAct);
-        textView.setText("Catgorie de l'activité à récupérer");
-
-
-        //textView.setText(getIntent().getStringExtra("nomActivity"));
+        textView.setText(getIntent().getStringExtra("activite"));
 
        // th.start();
         calendarView.setOnDateChangeListener((cal,y,m,d)->{
@@ -60,7 +57,6 @@ public class HorsMusiqueActivity extends AppCompatActivity {
         });
 
         sp.setOnItemClickListener((parent,  view,  position,  id)->{
-            System.out.println("--->adam + "+sp.getItemAtPosition(position).toString());
             Intent intent = new Intent(this, AffichageCoursActivity.class);
             startActivity(intent);
 

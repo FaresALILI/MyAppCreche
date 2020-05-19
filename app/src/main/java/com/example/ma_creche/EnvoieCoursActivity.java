@@ -29,6 +29,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class EnvoieCoursActivity extends AppCompatActivity {
@@ -51,7 +53,7 @@ StorageReference mStorage;
     ProgressDialog progressDialog;
     private static final int PICK_FILE=1;
     ArrayList<Uri> FilList=new ArrayList<Uri>();
-    StorageUtils storageUtils;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
