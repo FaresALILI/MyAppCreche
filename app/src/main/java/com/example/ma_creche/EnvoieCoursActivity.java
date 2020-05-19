@@ -154,7 +154,7 @@ StorageReference mStorage;
     public void selectFile(View view){
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         checkButton(view);
-        //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
        // startActivityForResult(intent,PICK_FILE);
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
