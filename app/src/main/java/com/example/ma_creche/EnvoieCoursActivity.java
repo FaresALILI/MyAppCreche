@@ -22,6 +22,10 @@ import androidx.core.content.ContextCompat;
 import com.example.ma_creche.dao.FichierDistant;
 import com.example.ma_creche.utils.CategirieUser;
 import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ma_creche.utils.CategirieUser;
+import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -53,6 +57,8 @@ StorageReference mStorage;
     ProgressDialog progressDialog;
     private static final int PICK_FILE=1;
     ArrayList<Uri> FilList=new ArrayList<Uri>();
+
+    FirebaseAuth fireAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +109,8 @@ StorageReference mStorage;
               //  uploadFile(v);
             }
         });
+        fireAuth = FirebaseAuth.getInstance();
+
 
         this.txtVwNotification =  findViewById(R.id.textViewNotification);
         this.btnEnvoiCours.setOnClickListener(v->{
@@ -114,8 +122,11 @@ StorageReference mStorage;
             }
         });
 
-        this.btnDecon.setOnClickListener((View v)->{
-                    this.cat.deconnexion();
+
+        this.btnDecon.setOnClickListener((View v)->
+                {
+                    //this.cat.deconnexion();
+                    FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 }

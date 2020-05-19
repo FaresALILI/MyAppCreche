@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AffichageCoursActivity"></activity>
+        <activity android:name=".CreationCompteActivity"></activity>
         <activity android:name=".BlocActivity" />
         <activity android:name=".HorsMusiqueActivity" />
         <activity android:name=".MusiqueActivity" />
