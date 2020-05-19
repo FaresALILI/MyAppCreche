@@ -102,19 +102,6 @@ StorageReference mStorage;
 
 
 
-        if (Build.VERSION.SDK_INT >= 22 && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            //requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},110);
-            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, 110);
-
-
-            //Après ce point, vous attendez le callback dans onRequestPermissionsResult
-            checkAndRequestPermissions(); //verifie la permission
-        } else {
-
-        }
-
-
-
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Processing Please Wait.....");
         this.editTextDesc = findViewById(R.id.editTextDescription);
@@ -136,6 +123,7 @@ StorageReference mStorage;
         this.btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("je upload");
                 uploadFile(v);
             }
         });
@@ -164,12 +152,13 @@ StorageReference mStorage;
     }
 
     public void selectFile(View view){
-        Intent intent=new Intent(Intent.ACTION_SEND);
+        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         checkButton(view);
+        //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+       // startActivityForResult(intent,PICK_FILE);
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-       Intent in = Intent.createChooser(intent,null);
-       startActivity(in);
+        startActivityForResult(Intent.createChooser(intent,"select pdf"),PDF);
     }
 
     @Override
@@ -237,21 +226,6 @@ StorageReference mStorage;
 
 
 
-    private  boolean checkAndRequestPermissions() {
-System.out.println("je verifie la permission");
-        List<String> listPermissionsNeeded = new ArrayList<>();
-        listPermissionsNeeded.clear();
-        int contact= ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
-
-        if (contact != PackageManager.PERMISSION_GRANTED) {
-            System.out.println("je verifie la permission 2 ");
-
-            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        }
-
-        return true;
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[],
@@ -271,6 +245,7 @@ System.out.println("je verifie la permission");
 
     public void uploadFile(View view){
         Toast.makeText(this,"if takes time , you can press Again",Toast.LENGTH_SHORT).show();
+        System.out.println("la taille "+FilList.size());
         for (int j=0;j<FilList.size();j++){
             Uri PerFile=FilList.get(j);
             String storage=selectedActivity.getText().toString();
