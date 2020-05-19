@@ -62,8 +62,51 @@ StorageReference mStorage;
         setContentView(R.layout.activity_envoie_cours);
 
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            System.out.println("la permisssion est refuséeeeee");
+
+
+
+            // Here, thisActivity is the current activity
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Permission is not granted
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                } else {
+                    // No explanation needed; request the permission
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            1000);
+
+                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                }
+            } else {
+                // Permission has already been granted
+            }
+
+        }
+        else
+            System.out.println("la permisssion est OKOKOKO");
+
+
+
+
+
         if (Build.VERSION.SDK_INT >= 22 && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
+            //requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},110);
+            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, 110);
+
+
             //Après ce point, vous attendez le callback dans onRequestPermissionsResult
             checkAndRequestPermissions(); //verifie la permission
         } else {
@@ -121,11 +164,12 @@ StorageReference mStorage;
     }
 
     public void selectFile(View view){
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent=new Intent(Intent.ACTION_SEND);
         checkButton(view);
-        intent.setType("application/pdf");
+        intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent,"select pdf"),PDF);
+       Intent in = Intent.createChooser(intent,null);
+       startActivity(in);
     }
 
     @Override
@@ -204,14 +248,7 @@ System.out.println("je verifie la permission");
 
             listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
-        if (!listPermissionsNeeded.isEmpty())
-        {
-            System.out.println("je verifie la permission 3 ");
 
-            ActivityCompat.requestPermissions(this,listPermissionsNeeded.toArray
-                    (new String[listPermissionsNeeded.size()]),REQUEST_ID_MULTIPLE_PERMISSIONS);
-            return false;
-        }
         return true;
     }
 
@@ -223,9 +260,9 @@ System.out.println("je verifie la permission");
             case PERMISSIONS_REQUEST_READ_CONTACTS: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // La permission est garantie
+                 System.out.println(" La permission est garantie");
                 } else {
-                    // La permission est refusée
+                 System.out.println("La permission est refusée");
                 }
                 return;
             }
