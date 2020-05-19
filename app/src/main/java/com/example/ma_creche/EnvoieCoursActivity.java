@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import com.example.ma_creche.dao.FichierDistant;
 import com.example.ma_creche.utils.CategirieUser;
 import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -31,16 +32,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-
-import static androidx.core.app.ActivityCompat.requestPermissions;
 
 public class EnvoieCoursActivity extends AppCompatActivity {
 int PDF=0;
 int DOCX =1;
 int AUDIO=2;
     int VIDEO= 3;
-        public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 2001;
         private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     Uri uri;
 StorageReference mStorage;
@@ -64,44 +61,22 @@ StorageReference mStorage;
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            System.out.println("la permisssion est refuséeeeee");
-
-
-
             // Here, thisActivity is the current activity
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
-
-                // Permission is not granted
-                // Should we show an explanation?
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                         Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    // Show an explanation to the user *asynchronously* -- don't block
-                    // this thread waiting for the user's response! After the user
-                    // sees the explanation, try again to request the permission.
                 } else {
                     // No explanation needed; request the permission
                     ActivityCompat.requestPermissions(this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                             1000);
-
-                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                    // app-defined int constant. The callback method gets the
-                    // result of the request.
                 }
             } else {
-                // Permission has already been granted
             }
 
         }
-        else
-            System.out.println("la permisssion est OKOKOKO");
-
-
-
-
-
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Processing Please Wait.....");
         this.editTextDesc = findViewById(R.id.editTextDescription);
@@ -112,7 +87,7 @@ StorageReference mStorage;
         this.typeActivity =  findViewById(R.id.typeActivity);
         int radioId= typeActivity.getCheckedRadioButtonId();
         this.selectedActivity =findViewById(radioId);
-        mStorage = FirebaseStorage.getInstance().getReference("Uploads");
+        mStorage = FirebaseStorage.getInstance().getReference();
         btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,8 +98,7 @@ StorageReference mStorage;
         this.btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("je upload");
-                uploadFile(v);
+              //  uploadFile(v);
             }
         });
 
@@ -158,7 +132,7 @@ StorageReference mStorage;
        // startActivityForResult(intent,PICK_FILE);
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"select pdf"),PDF);
+        startActivityForResult(Intent.createChooser(intent,"select file"),0);
     }
 
     @Override
@@ -196,22 +170,23 @@ StorageReference mStorage;
     }
 
     private void upload() {
-        System.out.println("je suis upload");
-        StorageReference folder=mStorage.child(uri.getLastPathSegment());
+        String storage=selectedActivity.getText().toString();
+
+        StorageReference folder=mStorage.child("ResMyAppCreche").child(storage).child(uri.getLastPathSegment());
         try{
         folder.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                                      @Override
                                                      public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                         System.out.println("je suis ici dans le succcess");
                                                        uri = taskSnapshot.getUploadSessionUri();
-                                                         System.out.println(uri.toString());
+                                                         Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
+
 
                                                      }
                                                  }
             );
     }catch(Exception e)
         {
-            System.out.println("  System.out.println(\"je suis ici dans le ko\");"+e.getStackTrace());
+            Toast.makeText(getApplicationContext(), "Erreur lors de l'envoi du fichier"+e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
 
@@ -234,23 +209,19 @@ StorageReference mStorage;
             case PERMISSIONS_REQUEST_READ_CONTACTS: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                 System.out.println(" La permission est garantie");
                 } else {
-                 System.out.println("La permission est refusée");
                 }
                 return;
             }
         }
     }
-
+/*
     public void uploadFile(View view){
         Toast.makeText(this,"if takes time , you can press Again",Toast.LENGTH_SHORT).show();
-        System.out.println("la taille "+FilList.size());
         for (int j=0;j<FilList.size();j++){
             Uri PerFile=FilList.get(j);
             String storage=selectedActivity.getText().toString();
-            //StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche").child(selectedActivity.getText().toString());
-            StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche").child(selectedActivity.getText().toString()).child(hebdodate());
+            StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche").child(storage).child(hebdodate());
             // StorageReference filename=folder.child(selectedActivity.getText().toString()+System.currentTimeMillis());
             StorageReference filename=folder.child(selectedActivity.getText().toString()+PerFile.getLastPathSegment());
             filename.putFile(PerFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -259,8 +230,9 @@ StorageReference mStorage;
                     filename.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+
                             System.out.println("extension = "+PerFile.getLastPathSegment());
-                            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("user");
+                            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("user");
                             HashMap<String, FichierDistant> hashMap=new HashMap<>();
                             FichierDistant file = new FichierDistant(String.valueOf(uri),
                                                                     String.valueOf(editTextDesc.getText()),
@@ -274,5 +246,5 @@ StorageReference mStorage;
                 }
             });
         }
-    }
+    }*/
 }

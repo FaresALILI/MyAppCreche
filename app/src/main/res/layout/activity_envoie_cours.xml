@@ -24,7 +24,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="490dp"
+            android:layout_height="418dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -142,7 +142,7 @@
             <Button
                 android:id="@+id/buttonEnvoyer"
                 android:layout_width="286dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="textVisiblePassword"
                 android:text="Envoyer"
