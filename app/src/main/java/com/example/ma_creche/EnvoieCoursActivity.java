@@ -1,8 +1,11 @@
 package com.example.ma_creche;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.ma_creche.dao.FichierDistant;
 import com.example.ma_creche.utils.CategirieUser;
@@ -26,12 +31,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+
+import static androidx.core.app.ActivityCompat.requestPermissions;
 
 public class EnvoieCoursActivity extends AppCompatActivity {
 int PDF=0;
 int DOCX =1;
 int AUDIO=2;
     int VIDEO= 3;
+        public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 2001;
+        private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     Uri uri;
 StorageReference mStorage;
     Button btnDecon;
@@ -50,6 +60,18 @@ StorageReference mStorage;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_envoie_cours);
+
+
+        if (Build.VERSION.SDK_INT >= 22 && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
+            //Après ce point, vous attendez le callback dans onRequestPermissionsResult
+            checkAndRequestPermissions(); //verifie la permission
+        } else {
+
+        }
+
+
+
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Processing Please Wait.....");
         this.editTextDesc = findViewById(R.id.editTextDescription);
@@ -168,8 +190,49 @@ StorageReference mStorage;
         int d=c.get(c.MONTH)+1;
         return c.get(Calendar.DAY_OF_MONTH)+"_"+d+"_"+c.get(Calendar.YEAR);
     }
+
+
+
+    private  boolean checkAndRequestPermissions() {
+System.out.println("je verifie la permission");
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        listPermissionsNeeded.clear();
+        int contact= ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
+
+        if (contact != PackageManager.PERMISSION_GRANTED) {
+            System.out.println("je verifie la permission 2 ");
+
+            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+        if (!listPermissionsNeeded.isEmpty())
+        {
+            System.out.println("je verifie la permission 3 ");
+
+            ActivityCompat.requestPermissions(this,listPermissionsNeeded.toArray
+                    (new String[listPermissionsNeeded.size()]),REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[],
+                                           int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_READ_CONTACTS: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // La permission est garantie
+                } else {
+                    // La permission est refusée
+                }
+                return;
+            }
+        }
+    }
+
     public void uploadFile(View view){
-        progressDialog.show();
         Toast.makeText(this,"if takes time , you can press Again",Toast.LENGTH_SHORT).show();
         for (int j=0;j<FilList.size();j++){
             Uri PerFile=FilList.get(j);
@@ -193,7 +256,6 @@ StorageReference mStorage;
                                                                     String.valueOf(PerFile.getLastPathSegment()));
                             hashMap.put("fichier",file);
                             databaseReference.push().setValue(hashMap);
-                            progressDialog.dismiss();
                             FilList.clear();
                         }
                     });
