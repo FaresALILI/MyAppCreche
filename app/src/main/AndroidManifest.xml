@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ma_creche">
+    package="com.techno.ma_creche">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,14 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AffichageCoursActivity"></activity>
-        <activity android:name=".CreationCompteActivity"></activity>
-        <activity android:name=".BlocActivity" />
-        <activity android:name=".HorsMusiqueActivity" />
+        <activity android:name="com.techno.ma_creche.AffichageCoursActivity"></activity>
+        <activity android:name="com.techno.ma_creche.CreationCompteActivity"></activity>
+        <activity android:name="com.techno.ma_creche.BlocActivity" />
+        <activity android:name="com.techno.ma_creche.HorsMusiqueActivity" />
         <activity android:name=".MusiqueActivity" />
-        <activity android:name=".AuthentificationActivity" />
-        <activity android:name=".EnvoieCoursActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.techno.ma_creche.AuthentificationActivity" />
+        <activity android:name="com.techno.ma_creche.EnvoieCoursActivity" />
+        <activity android:name="com.techno.ma_creche.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

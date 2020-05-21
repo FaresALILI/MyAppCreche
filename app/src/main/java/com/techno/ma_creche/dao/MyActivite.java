@@ -1,6 +1,4 @@
-package com.example.ma_creche.dao;
-
-import java.util.List;
+package com.techno.ma_creche.dao;
 
 public class MyActivite {
     String dateActivity;

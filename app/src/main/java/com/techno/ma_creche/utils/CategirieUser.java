@@ -1,4 +1,4 @@
-package com.example.ma_creche.utils;
+package com.techno.ma_creche.utils;
 
 public class CategirieUser {
     public static  String login;

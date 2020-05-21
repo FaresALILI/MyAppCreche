@@ -1,4 +1,4 @@
-package com.example.ma_creche;
+package com.techno.ma_creche;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,12 +11,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
-import com.example.ma_creche.dao.MyActivite;
-import com.example.ma_creche.utils.CategirieUser;
-import com.example.ma_creche.utils.StorageUtils;
+import com.techno.ma_creche.dao.MyActivite;
+import com.techno.ma_creche.utils.CategirieUser;
+import com.techno.ma_creche.utils.StorageUtils;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 public class HorsMusiqueActivity extends AppCompatActivity {
 

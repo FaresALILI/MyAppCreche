@@ -1,4 +1,4 @@
-package com.example.ma_creche.dao;
+package com.techno.ma_creche.dao;
 
 public class FichierDistant {
     String link;

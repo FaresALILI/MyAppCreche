@@ -1,4 +1,4 @@
-package com.example.ma_creche;
+package com.techno.ma_creche;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ma_creche.utils.CategirieUser;
+import com.techno.ma_creche.utils.CategirieUser;
 import com.google.firebase.auth.FirebaseAuth;
 
 

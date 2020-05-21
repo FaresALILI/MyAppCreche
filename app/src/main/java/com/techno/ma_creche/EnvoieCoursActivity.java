@@ -1,11 +1,10 @@
-package com.example.ma_creche;
+package com.techno.ma_creche;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,23 +18,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.ma_creche.dao.FichierDistant;
-import com.example.ma_creche.utils.CategirieUser;
+import com.techno.ma_creche.utils.CategirieUser;
 import com.google.android.gms.tasks.OnSuccessListener;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ma_creche.utils.CategirieUser;
 import com.google.firebase.auth.FirebaseAuth;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 
 public class EnvoieCoursActivity extends AppCompatActivity {
 int PDF=0;

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.ma_creche"
+        applicationId "com.techno.ma_creche"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
