@@ -137,3 +137,12 @@ Restore tous les fichiers
 git reset --hard HEAD~1
 ###########################################
 
+#############  tag  ################
+git tag 
+Pour afficher les tags (etiquette <=> version(release))
+
+git tag Nomdutag -m"monmessage"
+Pour créer un tag (étiquette <=> version(release)) dans une branche
+
+git push origine Nomdutag
+Pour pousser le tag Nomdutag (etiquette <=> version(release)) vers github.
