@@ -1,6 +1,7 @@
 package com.techno.ma_creche.dao;
 
 public class MyActivite {
+
     String dateActivity;
     String description;
 
