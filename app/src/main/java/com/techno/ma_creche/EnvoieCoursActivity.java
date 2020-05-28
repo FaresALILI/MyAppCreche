@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.techno.ma_creche.utils.CategirieUser;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -26,9 +28,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 public class EnvoieCoursActivity extends AppCompatActivity {
 int PDF=0;
@@ -99,7 +105,7 @@ StorageReference mStorage;
         this.btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  uploadFile(v);
+               //uploadFile(v);
             }
         });
         fireAuth = FirebaseAuth.getInstance();
@@ -112,6 +118,7 @@ StorageReference mStorage;
             }
             else{
                 //Envoi du cours ....
+                envoieCours(v);
             }
         });
 
@@ -124,6 +131,37 @@ StorageReference mStorage;
                     startActivity(intent);
                 }
         );
+    }
+
+    private void envoieCours(View v) {
+        // uploadFile
+        String storage=selectedActivity.getText().toString();
+        StorageReference folder=mStorage.child("ResMyAppCreche").child(storage).child(uri.getLastPathSegment());
+        try{
+            //envoie
+            folder.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    //ecriture dans la bdd
+                    uri = taskSnapshot.getUploadSessionUri();
+                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+                    Date date=new Date();
+                    Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
+                    // saisie dans la BDD
+                    DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("activites");
+					HashMap<String,String> hashMap=new HashMap<>();
+                    hashMap.put("dateActivity",String.valueOf(format.format(date)));
+                    hashMap.put("description", String.valueOf(editTextDesc.getText()));
+                    hashMap.put("typeActivity", String.valueOf(selectedActivity.getText()));
+                    hashMap.put("etat", "false");
+                    databaseReference.push().setValue(hashMap);
+                }
+            }
+            );
+        }catch(Exception e)
+        {
+            Toast.makeText(getApplicationContext(), "Erreur lors de l'envoi du fichier"+e.getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
 
     public void checkButton(View view){
@@ -149,24 +187,24 @@ StorageReference mStorage;
                 if (data.getData()!= null){
                 uri=data.getData();
                 System.out.println(uri.toString());
-                upload();
+               // upload();
                 }
            else if (requestCode==DOCX){
                 if (data.getData()!= null){
                     uri=data.getData();
                     System.out.println(uri.toString());
-                    upload();
+                   // upload();
                 }
                else if (requestCode==AUDIO) {
                     if (data.getData() != null) {
                         uri = data.getData();
                         System.out.println(uri.toString());
-                        upload();
+                       // upload();
                     } else if (requestCode == VIDEO) {
                         if (data.getData() != null) {
                             uri = data.getData();
                             System.out.println(uri.toString());
-                            upload();
+                            //upload();
                         }
                     }
                 }
