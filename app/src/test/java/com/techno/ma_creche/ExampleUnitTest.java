@@ -1,4 +1,4 @@
-package com.example.ma_creche;
+package com.techno.ma_creche;
 
 import org.junit.Test;
 

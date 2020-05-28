@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:27867310959:android:cf7710f8319c42402f169a",
         "android_client_info": {
-          "package_name": "com.example.ma_creche"
+          "package_name": "com.techno.ma_creche"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "27867310959-hd1cqg4ouhrlos5ut69mj0qqpnhrr409.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.ma_creche",
+            "package_name": "com.techno.ma_creche",
             "certificate_hash": "a16cdf6e92e0c5a3e747579b171c6f909fcb62b1"
           }
         },

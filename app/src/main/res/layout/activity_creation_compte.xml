@@ -58,36 +58,34 @@
         android:visibility="visible"
         tools:visibility="visible"></EditText>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Password confirm"
+        android:textColor="#070707"
+        android:textSize="18sp"
+        android:textStyle="bold"></TextView>
+
+    <EditText
+        android:id="@+id/editPassConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_margin="5dp"
+        android:background="#EDF1F2"
+        android:inputType="textPassword"
+        android:visibility="visible"
+        tools:visibility="visible"></EditText>
+
+    <Button
         android:id="@+id/butonbtnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#79FFC400"
         android:text="Se connecter"
-        android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+        android:textStyle="bold"></Button>
 
-    <TextView
-        android:id="@+id/textViewCreateAccount"
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:gravity="center"
-        android:text="Créer un compte"
-        android:textColor="#FF3D00"
-        android:textStyle="bold"
-        android:visibility="visible"
-        tools:visibility="visible" />
-
-    <TextView
-        android:id="@+id/textViewReinitPassword"
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:gravity="center"
-        android:text="Mot de passe oublié"
-        android:textColor="#FF3D00"
-        android:textStyle="bold"
-        android:visibility="visible"
-        tools:visibility="visible" />
 
 </LinearLayout>
 

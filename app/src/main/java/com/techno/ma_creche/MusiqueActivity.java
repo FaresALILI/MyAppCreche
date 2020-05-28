@@ -1,14 +1,12 @@
-package com.example.myappcom.enfants;
+package com.techno.myappcom.enfants;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.ma_creche.R;
+import com.techno.ma_creche.R;
 //import com.example.myappcom.UTILS.MediaUtils;
 
-import java.util.ArrayList;
 
 public class MusiqueActivity extends AppCompatActivity {
     ArrayAdapter<String> model;

@@ -1,4 +1,4 @@
-package com.example.ma_creche;
+package com.techno.ma_creche;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.ma_creche.utils.CategirieUser;
+import com.techno.ma_creche.utils.CategirieUser;
 
 public class MainActivity extends AppCompatActivity {
     Button butonEnseignant;

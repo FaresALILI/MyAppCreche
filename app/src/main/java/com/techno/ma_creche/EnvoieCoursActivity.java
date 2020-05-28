@@ -1,11 +1,10 @@
-package com.example.ma_creche;
+package com.techno.ma_creche;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,19 +18,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.ma_creche.dao.FichierDistant;
-import com.example.ma_creche.utils.CategirieUser;
+import com.techno.ma_creche.utils.CategirieUser;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 
 public class EnvoieCoursActivity extends AppCompatActivity {
 int PDF=0;
@@ -53,6 +50,9 @@ StorageReference mStorage;
     ProgressDialog progressDialog;
     private static final int PICK_FILE=1;
     ArrayList<Uri> FilList=new ArrayList<Uri>();
+
+    FirebaseAuth fireAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,12 +81,13 @@ StorageReference mStorage;
         progressDialog.setMessage("Processing Please Wait.....");
         this.editTextDesc = findViewById(R.id.editTextDescription);
         this. btnDecon= findViewById(R.id.buttonDeconnexion);
-        this.btnEnvoiCours =  findViewById(R.id.buttonEnvoyer);
+        this.btnEnvoiCours =  findViewById(R.id.buttonVlider);
         this.btnUpload =  findViewById(R.id.buttonUpload);
         this.btnSelectFile =  findViewById(R.id.buttonSelectFile);
         this.typeActivity =  findViewById(R.id.typeActivity);
         int radioId= typeActivity.getCheckedRadioButtonId();
         this.selectedActivity =findViewById(radioId);
+
         mStorage = FirebaseStorage.getInstance().getReference();
         btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +102,8 @@ StorageReference mStorage;
               //  uploadFile(v);
             }
         });
+        fireAuth = FirebaseAuth.getInstance();
+
 
         this.txtVwNotification =  findViewById(R.id.textViewNotification);
         this.btnEnvoiCours.setOnClickListener(v->{
@@ -112,8 +115,11 @@ StorageReference mStorage;
             }
         });
 
-        this.btnDecon.setOnClickListener((View v)->{
-                    this.cat.deconnexion();
+
+        this.btnDecon.setOnClickListener((View v)->
+                {
+                    //this.cat.deconnexion();
+                    FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 }
@@ -215,36 +221,5 @@ StorageReference mStorage;
             }
         }
     }
-/*
-    public void uploadFile(View view){
-        Toast.makeText(this,"if takes time , you can press Again",Toast.LENGTH_SHORT).show();
-        for (int j=0;j<FilList.size();j++){
-            Uri PerFile=FilList.get(j);
-            String storage=selectedActivity.getText().toString();
-            StorageReference folder=FirebaseStorage.getInstance().getReference().child("ResMyAppCreche").child(storage).child(hebdodate());
-            // StorageReference filename=folder.child(selectedActivity.getText().toString()+System.currentTimeMillis());
-            StorageReference filename=folder.child(selectedActivity.getText().toString()+PerFile.getLastPathSegment());
-            filename.putFile(PerFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    filename.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
 
-                            System.out.println("extension = "+PerFile.getLastPathSegment());
-                            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("user");
-                            HashMap<String, FichierDistant> hashMap=new HashMap<>();
-                            FichierDistant file = new FichierDistant(String.valueOf(uri),
-                                                                    String.valueOf(editTextDesc.getText()),
-                                                                    String.valueOf(selectedActivity.getText()),
-                                                                    String.valueOf(PerFile.getLastPathSegment()));
-                            hashMap.put("fichier",file);
-                            databaseReference.push().setValue(hashMap);
-                            FilList.clear();
-                        }
-                    });
-                }
-            });
-        }
-    }*/
 }

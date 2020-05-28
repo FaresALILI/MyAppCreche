@@ -1,4 +1,4 @@
-package com.example.ma_creche;
+package com.techno.ma_creche;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ma_creche.utils.CategirieUser;
-
+import com.techno.ma_creche.utils.CategirieUser;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class BlocActivity extends AppCompatActivity {
@@ -57,13 +57,13 @@ CategirieUser cat;
                         startActivity(intent);
                     }
 
-                System.out.println("image testttt");
                 });
 
 
         this.btnDecon.setOnClickListener((View v)->
         {
-          this.cat.deconnexion();
+          //this.cat.deconnexion();
+            FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -81,16 +81,60 @@ CategirieUser cat;
         this.txtDes.setText(this.txtDes.getText()+" (3)");
 
         //Générer une vibration
-        Vibrator vib=(Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+        /*Vibrator vib=(Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
         vib.vibrate(2000);
-
+*/
         this.btnDes.setOnClickListener(v->
         {
-                System.out.println("je suis dans la partie dessin enseignant bloc"  );
                 Intent intent = new Intent(this, HorsMusiqueActivity.class);
                 intent.putExtra("categorie", "enseignant");
+                intent.putExtra("activite", "dessin");
                 startActivity(intent);
         });
+
+        this.btnHist.setOnClickListener(v->
+        {
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "histoire");
+            startActivity(intent);
+        });
+
+        this.btnAct.setOnClickListener(v->
+        {
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "activite manuelle");
+            startActivity(intent);
+        });
+
+        this.btnCal.setOnClickListener(v->
+        {
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "calcul");
+            startActivity(intent);
+        });
+
+        this.btnDiv.setOnClickListener(v->
+        {
+            System.out.println("je suis dans la partie dessin enseignant bloc"  );
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "divers");
+            startActivity(intent);
+        });
+
+        this.btnMus.setOnClickListener(v->
+        {
+            System.out.println("je suis dans la partie dessin enseignant bloc"  );
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "musique");
+            startActivity(intent);
+        });
+
+
      }
 
 }
