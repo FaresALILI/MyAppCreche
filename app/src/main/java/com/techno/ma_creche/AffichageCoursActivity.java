@@ -3,6 +3,8 @@ package com.techno.ma_creche;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 import android.widget.EditText;
@@ -13,7 +15,7 @@ public class AffichageCoursActivity extends AppCompatActivity {
     EditText editTextDescription;
     TextView textViewDateEnvoi;
     TextView textViewStatut;
-	
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,5 +28,6 @@ public class AffichageCoursActivity extends AppCompatActivity {
         String[] activity = getIntent().getStringExtra("currentActivity").split("/" );;
         this.textViewDateEnvoi.setText(activity[0]);
         this.editTextDescription.setText(activity[1]);
+
     }
 }

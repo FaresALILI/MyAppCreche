@@ -2,7 +2,6 @@ package com.techno.ma_creche.dao;
 
 public class MyActivite {
 
-
     String idActivity;
     String dateActivity;
     String description;
@@ -20,7 +19,7 @@ public class MyActivite {
     public void setEtat(boolean etat) {
         this.etat = etat;
     }
-	
+
     public MyActivite() {
     }
 
@@ -39,7 +38,6 @@ public class MyActivite {
     public String getDescription() {
         return description;
     }
-
     public String getIdActivity() {
         return idActivity;
     }
@@ -47,6 +45,10 @@ public class MyActivite {
     public void setIdActivity(String idActivity) {
         this.idActivity = idActivity;
     }
+
+
+
+
 
 
 }
