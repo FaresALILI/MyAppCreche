@@ -81,17 +81,60 @@ CategirieUser cat;
         this.txtDes.setText(this.txtDes.getText()+" (3)");
 
         //Générer une vibration
-        Vibrator vib=(Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+        /*Vibrator vib=(Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
         vib.vibrate(2000);
-
+*/
         this.btnDes.setOnClickListener(v->
         {
-                System.out.println("je suis dans la partie dessin enseignant bloc"  );
                 Intent intent = new Intent(this, HorsMusiqueActivity.class);
                 intent.putExtra("categorie", "enseignant");
                 intent.putExtra("activite", "dessin");
                 startActivity(intent);
         });
+
+        this.btnHist.setOnClickListener(v->
+        {
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "histoire");
+            startActivity(intent);
+        });
+
+        this.btnAct.setOnClickListener(v->
+        {
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "activite manuelle");
+            startActivity(intent);
+        });
+
+        this.btnCal.setOnClickListener(v->
+        {
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "calcul");
+            startActivity(intent);
+        });
+
+        this.btnDiv.setOnClickListener(v->
+        {
+            System.out.println("je suis dans la partie dessin enseignant bloc"  );
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "divers");
+            startActivity(intent);
+        });
+
+        this.btnMus.setOnClickListener(v->
+        {
+            System.out.println("je suis dans la partie dessin enseignant bloc"  );
+            Intent intent = new Intent(this, HorsMusiqueActivity.class);
+            intent.putExtra("categorie", "enseignant");
+            intent.putExtra("activite", "musique");
+            startActivity(intent);
+        });
+
+
      }
 
 }
