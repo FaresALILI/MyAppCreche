@@ -83,7 +83,7 @@ String userID;
 
 
                     Toast.makeText(this,"Connexion réusie",Toast.LENGTH_SHORT).show();
-                    Intent intent= new Intent(this, BlocActivity.class);
+                    Intent intent= new Intent(this, ChoixSectionActivity.class);
                     startActivity(intent);
                 }
           }).addOnFailureListener(e->{

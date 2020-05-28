@@ -5,11 +5,22 @@ public class MyActivite {
     String idActivity;
     String dateActivity;
     String description;
+    String typeActivity;
     boolean etat;
+    public String getTypeActivity() {
+        return typeActivity;
+    }
 
-    public MyActivite(String dateActivity, String description) {
+    public void setTypeActivity(String typeActivity) {
+        this.typeActivity = typeActivity;
+    }
+
+
+
+    public MyActivite(String dateActivity, String description,String typeActivity) {
         this.dateActivity = dateActivity;
         this.description = description;
+        this.typeActivity = typeActivity;
         this.etat=false;
     }
     public boolean isEtat() {

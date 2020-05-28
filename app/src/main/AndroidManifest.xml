@@ -14,14 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.techno.ma_creche.AffichageCoursActivity"></activity>
-        <activity android:name="com.techno.ma_creche.CreationCompteActivity"></activity>
-        <activity android:name="com.techno.ma_creche.BlocActivity" />
-        <activity android:name="com.techno.ma_creche.HorsMusiqueActivity" />
+        <activity android:name=".ChoixSectionActivity"></activity>
+        <activity android:name=".AffichageCoursActivity" />
+        <activity android:name=".CreationCompteActivity" />
+        <activity android:name=".BlocActivity" />
+        <activity android:name=".HorsMusiqueActivity" />
         <activity android:name=".MusiqueActivity" />
-        <activity android:name="com.techno.ma_creche.AuthentificationActivity" />
-        <activity android:name="com.techno.ma_creche.EnvoieCoursActivity" />
-        <activity android:name="com.techno.ma_creche.MainActivity">
+        <activity android:name=".AuthentificationActivity" />
+        <activity android:name=".EnvoieCoursActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

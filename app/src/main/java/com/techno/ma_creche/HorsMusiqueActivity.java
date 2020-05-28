@@ -58,6 +58,7 @@ public class HorsMusiqueActivity extends AppCompatActivity {
                                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                             int i = 0;
                                                             for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                                                               // myActivity = new MyActivite();
                                                                 myActivity = snap.getValue(MyActivite.class);
                                                                 myActivity.setIdActivity(snap.getKey());
                                                                 myActivities[i] = myActivity.getDateActivity().toString() + " / " + myActivity.getDescription().toString();
