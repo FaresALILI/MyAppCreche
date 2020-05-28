@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -34,6 +35,7 @@ public class HorsMusiqueActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     List<MyActivite> activities ;
     String[] myActivities;
+    MyActivite myActivity;
     ArrayAdapter<String> arrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +48,21 @@ public class HorsMusiqueActivity extends AppCompatActivity {
 
         ListView sp = (ListView) findViewById(R.id.listViewMusic);
         this.btnDecon = findViewById(R.id.buttonDeconnexion);
-        TextView textView =findViewById(R.id.textViewNomAct);
+        TextView textView = findViewById(R.id.textViewNomAct);
         textView.setText(getIntent().getStringExtra("activite"));
 
-       // th.start();
-        calendarView.setOnDateChangeListener((cal,y,m,d)->{
+        // th.start();
+        calendarView.setOnDateChangeListener((cal, y, m, d) -> {
             databaseReference.addValueEventListener(new ValueEventListener() {
                                                         @Override
                                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                             int i = 0;
                                                             for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                                                                MyActivite myActivity = snap.getValue(MyActivite.class);
-                                                                myActivities[i] = myActivity.getDateActivity().toString() + "  " + myActivity.getDescription().toString();
+                                                                myActivity = snap.getValue(MyActivite.class);
+                                                                myActivity.setIdActivity(snap.getKey());
+                                                                myActivities[i] = myActivity.getDateActivity().toString() + " / " + myActivity.getDescription().toString();
+
+                                                                System.out.println("la cle=" + snap.getKey() + "--->" + myActivity.getIdActivity());
                                                                 i++;
                                                             }
                                                             int taille = 0;
@@ -76,34 +81,44 @@ public class HorsMusiqueActivity extends AppCompatActivity {
                                                             arrayAdapter = new ArrayAdapter<String>(HorsMusiqueActivity.this, android.R.layout.simple_list_item_1, myActivitiesRelle);
                                                             sp.setAdapter(arrayAdapter);
                                                         }
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                                        }
+                @Override
+               public void onCancelled(@NonNull DatabaseError databaseError) {
+                 }
                                                     }
 
             );
 
-            String date = "date = "+ d+"_"+(m+1)+"_"+y;
+            String date = "date = " + d + "_" + (m + 1) + "_" + y;
             getListeCours(date);
-            System.out.println("date = "+ d+"_"+(m+1)+"_"+y);
+            System.out.println("date = " + d + "_" + (m + 1) + "_" + y);
             sp.setAdapter(arrayAdapter);
         });
 
-        sp.setOnItemClickListener((parent,  view,  position,  id)->{
+        sp.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(this, AffichageCoursActivity.class);
+           // intent.putExtra("currentActivity",)
             startActivity(intent);
 
         });
 
         //ssp.setAdapter(model);
-        this.btnDecon.setOnClickListener((View v)->
+        this.btnDecon.setOnClickListener((View v) ->
                 {
                     this.cat.deconnexion();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 }
         );
+
+        sp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("--->"+myActivities[position]);
+                Intent intent = new Intent(HorsMusiqueActivity.this, AffichageCoursActivity.class);
+                intent.putExtra("currentActivity",myActivities[position]);
+                startActivity(intent);            }
+        });
     }
 
     private void getListeCours(String date) {
