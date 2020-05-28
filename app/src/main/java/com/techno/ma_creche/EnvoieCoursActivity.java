@@ -154,6 +154,8 @@ StorageReference mStorage;
                     hashMap.put("description", String.valueOf(editTextDesc.getText()));
                     hashMap.put("typeActivity", String.valueOf(selectedActivity.getText()));
                     hashMap.put("etat", "false");
+                    hashMap.put("nomFile", String.valueOf(uri));
+                    hashMap.put("link", String.valueOf(uri));
                     databaseReference.push().setValue(hashMap);
                 }
             }
@@ -183,6 +185,9 @@ StorageReference mStorage;
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK){
+            System.out.println("test1 toString"+data.getData().toString());
+            System.out.println("test2 toString"+data.getType());
+            System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
         if (requestCode==PDF){
                 if (data.getData()!= null){
                 uri=data.getData();
@@ -192,17 +197,26 @@ StorageReference mStorage;
            else if (requestCode==DOCX){
                 if (data.getData()!= null){
                     uri=data.getData();
-                    System.out.println(uri.toString());
+                    System.out.println("test1 toString"+uri.toString());
+                    System.out.println("test2 toString"+data.getType());
+                    System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+
                    // upload();
                 }
                else if (requestCode==AUDIO) {
                     if (data.getData() != null) {
                         uri = data.getData();
+                        System.out.println("test1 toString"+uri.toString());
+                        System.out.println("test2 toString"+data.getType());
+                        System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
                         System.out.println(uri.toString());
                        // upload();
                     } else if (requestCode == VIDEO) {
                         if (data.getData() != null) {
                             uri = data.getData();
+                            System.out.println("test1 toString"+uri.toString());
+                            System.out.println("test2 toString"+data.getType());
+                            System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
                             System.out.println(uri.toString());
                             //upload();
                         }
