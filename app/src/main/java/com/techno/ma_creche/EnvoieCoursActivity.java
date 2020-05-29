@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.techno.ma_creche.dao.MyActivite;
 import com.techno.ma_creche.utils.CategirieUser;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -160,14 +161,26 @@ StorageReference mStorage;
                     Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
                     // saisie dans la BDD
                     DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("activites");
-					HashMap<String,String> hashMap=new HashMap<>();
+/*					HashMap<String,Object> hashMap=new HashMap<>();
                     hashMap.put("dateActivity",String.valueOf(format.format(date)));
                     hashMap.put("description", String.valueOf(editTextDesc.getText()));
                     hashMap.put("typeActivity", String.valueOf(selectedActivity.getText()));
-                    hashMap.put("etat", "false");
+                    hashMap.put("etat", false);
                     hashMap.put("nomFile", String.valueOf(uri));
                     hashMap.put("link", String.valueOf(uri));
                     databaseReference.push().setValue(hashMap);
+*/
+
+                    MyActivite myActivite =new MyActivite();
+                    myActivite.setDateActivity(String.valueOf(format.format(date)));
+                    myActivite.setDescription(editTextDesc.getText().toString());
+                    myActivite.setEtat(false);
+                    ArrayList<String> fil=new ArrayList<>();
+                    fil.add("fichier 1");
+                    fil.add("fichier 2");
+                    fil.add("fichier 3");
+                    myActivite.setListFiles(fil);
+                    databaseReference.push().setValue(myActivite);
                 }
             }
             );

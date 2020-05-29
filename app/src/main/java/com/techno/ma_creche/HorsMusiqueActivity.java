@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class HorsMusiqueActivity extends AppCompatActivity {
@@ -61,22 +62,26 @@ public class HorsMusiqueActivity extends AppCompatActivity {
                                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                             int i = 0;
                                                             for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                                                                myActivity = snap.getValue(MyActivite.class);
-                                                                myActivity.setIdActivity(snap.getKey());
-                                                                myActivities[i] = myActivity.getDateActivity().toString() + " / " + myActivity.getDescription().toString();
-                                                                mesActivities[i]=myActivity;
-                                                                System.out.println("la cle=" + snap.getKey() + "--->" + myActivity.getIdActivity());
+                                                                System.out.println("count" +snap.child("listFiles").getValue().toString());
+                                                                myActivity = new MyActivite();
+                                                                myActivity.setListFiles((Collection<String>) snap.child("listFiles").getValue());
+                                                                myActivity.setEtat((Boolean) snap.child("etat").getValue());
+                                                                myActivity.setDescription((String) snap.child("description").getValue());
+                                                              //  myActivity.setIdActivity(snap.getKey());
+                                                                //myActivities[i] = myActivity.getDateActivity().toString() + " / " + myActivity.getDescription().toString();
+                                                               // mesActivities[i]=myActivity;
+                                                                //System.out.println("la cle=" + snap.getKey() + "--->" + myActivity.getIdActivity());
                                                                 i++;
                                                             }
                                                             int taille = 0;
-                                                            for (String s : myActivities) {
+                                                            for (String s : myActivity.getListFiles()) {
                                                                 if (s != null)
                                                                     taille++;
                                                             }
                                                             String[] myActivitiesRelle = new String[taille];
                                                             int j = 0;
                                                             for (String s : myActivities) {
-                                                                if (s != null) {
+                                                                    if (s != null) {
                                                                     myActivitiesRelle[j] = s;
                                                                     j++;
                                                                 }
