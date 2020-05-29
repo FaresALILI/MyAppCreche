@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ import com.techno.ma_creche.utils.CategirieUser;
 import com.techno.ma_creche.utils.StorageUtils;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class HorsMusiqueActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     List<MyActivite> activities ;
     String[] myActivities;
+    MyActivite[] mesActivities;
     MyActivite myActivity;
     ArrayAdapter<String> arrayAdapter;
     @Override
@@ -45,7 +48,7 @@ public class HorsMusiqueActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("activites");
         this.activities = new ArrayList<>();
         myActivities = new String[100];
-
+        mesActivities = new MyActivite[100];
         ListView sp = (ListView) findViewById(R.id.listViewMusic);
         this.btnDecon = findViewById(R.id.buttonDeconnexion);
         TextView textView = findViewById(R.id.textViewNomAct);
@@ -61,7 +64,7 @@ public class HorsMusiqueActivity extends AppCompatActivity {
                                                                 myActivity = snap.getValue(MyActivite.class);
                                                                 myActivity.setIdActivity(snap.getKey());
                                                                 myActivities[i] = myActivity.getDateActivity().toString() + " / " + myActivity.getDescription().toString();
-
+                                                                mesActivities[i]=myActivity;
                                                                 System.out.println("la cle=" + snap.getKey() + "--->" + myActivity.getIdActivity());
                                                                 i++;
                                                             }
@@ -114,9 +117,9 @@ public class HorsMusiqueActivity extends AppCompatActivity {
         sp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("--->"+myActivities[position]);
+                System.out.println("--ADAM ->"+mesActivities[position].getIdActivity());
                 Intent intent = new Intent(HorsMusiqueActivity.this, AffichageCoursActivity.class);
-                intent.putExtra("currentActivity",myActivities[position]);
+                intent.putExtra("currentActivity", mesActivities[position].getIdActivity());
                 startActivity(intent);            }
         });
     }

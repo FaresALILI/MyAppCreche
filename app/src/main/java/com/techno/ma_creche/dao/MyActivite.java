@@ -1,11 +1,15 @@
 package com.techno.ma_creche.dao;
 
+import java.util.Collection;
+
 public class MyActivite {
 
     String idActivity;
     String dateActivity;
     String description;
     boolean etat;
+
+    Collection<String>listFiles;
 
     public MyActivite(String dateActivity, String description) {
         this.dateActivity = dateActivity;
@@ -43,6 +47,14 @@ public class MyActivite {
 
     public void setIdActivity(String idActivity) {
         this.idActivity = idActivity;
+    }
+
+    public Collection<String> getListFiles() {
+        return listFiles;
+    }
+
+    public void setListFiles(Collection<String> listFiles) {
+        this.listFiles = listFiles;
     }
 
 

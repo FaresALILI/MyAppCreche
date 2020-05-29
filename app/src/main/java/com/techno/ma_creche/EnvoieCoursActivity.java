@@ -1,11 +1,14 @@
 package com.techno.ma_creche;
 
 import android.Manifest;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +51,7 @@ StorageReference mStorage;
     EditText editTextDesc;
     TextView txtVwNotification;
     ProgressDialog progressDialog;
+
     private static final int PICK_FILE=1;
     ArrayList<Uri> FilList=new ArrayList<Uri>();
 
@@ -118,10 +122,13 @@ StorageReference mStorage;
 
         this.btnDecon.setOnClickListener((View v)->
                 {
+                    /*
                     //this.cat.deconnexion();
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
+                    */
+                    //download("Dessin");
                 }
         );
     }
@@ -195,6 +202,28 @@ StorageReference mStorage;
             Toast.makeText(getApplicationContext(), "Erreur lors de l'envoi du fichier"+e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public String hebdodate() {
         Calendar c = Calendar.getInstance();
