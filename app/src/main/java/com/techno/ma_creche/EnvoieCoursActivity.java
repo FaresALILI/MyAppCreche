@@ -149,7 +149,7 @@ StorageReference mStorage;
                     System.out.println("mon uri 1 ="+taskSnapshot.getMetadata().getContentType());
                     System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getName());
                     System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getSizeBytes()/1000 +"Mo");
-
+                    System.out.println("Test FFFF**:"+taskSnapshot.getMetadata().getName()+"   "+taskSnapshot.getMetadata().getSizeBytes()+"  "+taskSnapshot.getMetadata().getContentType());
                     Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
                     // saisie dans la BDD
                     DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("activites");
