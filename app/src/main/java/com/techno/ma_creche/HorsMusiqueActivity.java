@@ -68,7 +68,7 @@ public class HorsMusiqueActivity extends AppCompatActivity {
                                                                 myActivity.setEtat((Boolean) snap.child("etat").getValue());
                                                                 myActivity.setDescription((String) snap.child("description").getValue());
                                                                 myActivity.setDateActivity((String) snap.child("dateActivity").getValue());
-                                                              //  myActivity.setIdActivity(snap.getKey());
+                                                                myActivity.setIdActivity(snap.getKey());
                                                                 //myActivities[i] = myActivity.getDateActivity().toString() + " / " + myActivity.getDescription().toString();
                                                                 mesActivities[i]=myActivity;
                                                                 //System.out.println("la cle=" + snap.getKey() + "--->" + myActivity.getIdActivity());
@@ -126,9 +126,10 @@ public class HorsMusiqueActivity extends AppCompatActivity {
         sp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("--ADAM ->"+mesActivities[position].getIdActivity());
+                System.out.println("--ADAM ->"+position+"//"+mesActivities[position].getIdActivity());
                 Intent intent = new Intent(HorsMusiqueActivity.this, AffichageCoursActivity.class);
-                intent.putExtra("currentActivity", mesActivities[position].getIdActivity());
+                MyActivite myActivite = mesActivities[position];
+                intent.putExtra("currentActivity",(Serializable)(myActivite));
                 startActivity(intent);            }
         });
     }

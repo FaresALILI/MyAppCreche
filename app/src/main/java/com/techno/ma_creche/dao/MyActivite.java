@@ -1,8 +1,9 @@
 package com.techno.ma_creche.dao;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class MyActivite {
+public class MyActivite implements Serializable {
 
     String idActivity;
     String dateActivity;

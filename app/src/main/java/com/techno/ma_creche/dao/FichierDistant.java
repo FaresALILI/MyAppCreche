@@ -1,6 +1,8 @@
 package com.techno.ma_creche.dao;
 
-public class FichierDistant {
+import java.io.Serializable;
+
+public class FichierDistant implements Serializable {
     String link;
     String description;
     String typeActivity;
