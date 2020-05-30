@@ -178,10 +178,19 @@ StorageReference mStorage;
                     myActivite.setEtat(false);
                     ArrayList<FichierDistant> fil=new ArrayList<>();
                     FichierDistant f1 =new FichierDistant();
+                    f1.setDescription(editTextDesc.getText().toString());
+                    f1.setExtFile(".jpg");
+                    f1.setLink("www.link.com");
+                    f1.setTypeActivity("Dessin");
+                    FichierDistant f2 =new FichierDistant();
+                    f2.setDescription(editTextDesc.getText().toString());
+                    f2.setExtFile(".pdf");
+                    f2.setLink("www.link2.com");
+                    f2.setTypeActivity("Dessin");
 
-                    fil.add("fichier 1");
-                    fil.add("fichier 2");
-                    fil.add("fichier 3");
+                    fil.add(f1);
+                    fil.add(f2);
+
                     myActivite.setListFiles(fil);
                     databaseReference.push().setValue(myActivite);
                 }

@@ -64,28 +64,29 @@ public class HorsMusiqueActivity extends AppCompatActivity {
                                                             for (DataSnapshot snap : dataSnapshot.getChildren()) {
                                                                 System.out.println("count" +snap.child("listFiles").getValue().toString());
                                                                 myActivity = new MyActivite();
-                                                                myActivity.setListFiles((Collection<String>) snap.child("listFiles").getValue());
+                                                                myActivity.setListFiles((Collection<FichierDistant>) snap.child("listFiles").getValue());
                                                                 myActivity.setEtat((Boolean) snap.child("etat").getValue());
                                                                 myActivity.setDescription((String) snap.child("description").getValue());
+                                                                myActivity.setDateActivity((String) snap.child("dateActivity").getValue());
                                                               //  myActivity.setIdActivity(snap.getKey());
                                                                 //myActivities[i] = myActivity.getDateActivity().toString() + " / " + myActivity.getDescription().toString();
-                                                               // mesActivities[i]=myActivity;
+                                                                mesActivities[i]=myActivity;
                                                                 //System.out.println("la cle=" + snap.getKey() + "--->" + myActivity.getIdActivity());
                                                                 i++;
                                                             }
                                                             int taille = 0;
                                                             System.out.println("*******************");
-                                                            for (String s : myActivity.getListFiles()) {
+                                                            for (MyActivite s : mesActivities) {
                                                                 if (s != null)
                                                                     taille++;
                                                             }
                                                             System.out.println("*****" + taille+"  ******");
                                                             String[] myActivitiesRelle = new String[taille];
                                                             int j = 0;
-                                                            for (String s : myActivity.getListFiles()) {
+                                                            for (MyActivite s : mesActivities) {
                                                                     if (s != null) {
-                                                                        System.out.println("s=  "+s);
-                                                                    myActivitiesRelle[j] = s;
+                                                                        System.out.println("s=  "+s.getIdActivity());
+                                                                    myActivitiesRelle[j] = s.getDateActivity()+"/"+s.getDescription();
                                                                     j++;
                                                                 }
                                                             }
