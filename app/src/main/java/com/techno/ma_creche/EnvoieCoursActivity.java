@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.techno.ma_creche.dao.FichierDistant;
 import com.techno.ma_creche.dao.MyActivite;
 import com.techno.ma_creche.utils.CategirieUser;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -175,7 +176,9 @@ StorageReference mStorage;
                     myActivite.setDateActivity(String.valueOf(format.format(date)));
                     myActivite.setDescription(editTextDesc.getText().toString());
                     myActivite.setEtat(false);
-                    ArrayList<String> fil=new ArrayList<>();
+                    ArrayList<FichierDistant> fil=new ArrayList<>();
+                    FichierDistant f1 =new FichierDistant();
+
                     fil.add("fichier 1");
                     fil.add("fichier 2");
                     fil.add("fichier 3");

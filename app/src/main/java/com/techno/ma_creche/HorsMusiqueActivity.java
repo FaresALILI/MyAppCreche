@@ -74,14 +74,17 @@ public class HorsMusiqueActivity extends AppCompatActivity {
                                                                 i++;
                                                             }
                                                             int taille = 0;
+                                                            System.out.println("*******************");
                                                             for (String s : myActivity.getListFiles()) {
                                                                 if (s != null)
                                                                     taille++;
                                                             }
+                                                            System.out.println("*****" + taille+"  ******");
                                                             String[] myActivitiesRelle = new String[taille];
                                                             int j = 0;
-                                                            for (String s : myActivities) {
+                                                            for (String s : myActivity.getListFiles()) {
                                                                     if (s != null) {
+                                                                        System.out.println("s=  "+s);
                                                                     myActivitiesRelle[j] = s;
                                                                     j++;
                                                                 }

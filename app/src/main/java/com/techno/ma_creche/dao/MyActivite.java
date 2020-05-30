@@ -9,7 +9,7 @@ public class MyActivite {
     String description;
     boolean etat;
 
-    Collection<String>listFiles;
+    Collection<FichierDistant>listFiles;
 
     public MyActivite(String dateActivity, String description) {
         this.dateActivity = dateActivity;
@@ -49,11 +49,11 @@ public class MyActivite {
         this.idActivity = idActivity;
     }
 
-    public Collection<String> getListFiles() {
+    public Collection<FichierDistant> getListFiles() {
         return listFiles;
     }
 
-    public void setListFiles(Collection<String> listFiles) {
+    public void setListFiles(Collection<FichierDistant> listFiles) {
         this.listFiles = listFiles;
     }
 
