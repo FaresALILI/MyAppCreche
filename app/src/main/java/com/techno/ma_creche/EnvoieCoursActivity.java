@@ -1,11 +1,14 @@
 package com.techno.ma_creche;
 
 import android.Manifest;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +23,8 @@ import androidx.core.content.ContextCompat;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.techno.ma_creche.dao.FichierDistant;
+import com.techno.ma_creche.dao.MyActivite;
 import com.techno.ma_creche.utils.CategirieUser;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -54,6 +59,7 @@ StorageReference mStorage;
     EditText editTextDesc;
     TextView txtVwNotification;
     ProgressDialog progressDialog;
+
     private static final int PICK_FILE=1;
     ArrayList<Uri> FilList=new ArrayList<Uri>();
 
@@ -125,10 +131,13 @@ StorageReference mStorage;
 
         this.btnDecon.setOnClickListener((View v)->
                 {
+                    /*
                     //this.cat.deconnexion();
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
+                    */
+                    //download("Dessin");
                 }
         );
     }
@@ -146,18 +155,42 @@ StorageReference mStorage;
                     uri = taskSnapshot.getUploadSessionUri();
                     DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
                     Date date=new Date();
+                    System.out.println("mon uri 1 ="+taskSnapshot.getMetadata().getContentType());
+                    System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getName());
+                    System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getSizeBytes()/1000 +"Mo");
+                    System.out.println("Test FFFF**:"+taskSnapshot.getMetadata().getName()+"   "+taskSnapshot.getMetadata().getSizeBytes()+"  "+taskSnapshot.getMetadata().getContentType());
                     Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
                     // saisie dans la BDD
                     DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("activites");
+
                     System.out.println("Test FFFF**:"+taskSnapshot.getMetadata().getName()+"   "+taskSnapshot.getMetadata().getSizeBytes()+"  "+taskSnapshot.getMetadata().getContentType());
 					HashMap<String,String> hashMap=new HashMap<>();
+
+/*					HashMap<String,Object> hashMap=new HashMap<>();
+
                     hashMap.put("dateActivity",String.valueOf(format.format(date)));
                     hashMap.put("description", String.valueOf(editTextDesc.getText()));
                     hashMap.put("typeActivity", String.valueOf(selectedActivity.getText()));
-                    hashMap.put("etat", "false");
+                    hashMap.put("etat", false);
                     hashMap.put("nomFile", String.valueOf(uri));
                     hashMap.put("link", String.valueOf(uri));
                     databaseReference.push().setValue(hashMap);
+*/
+
+                    MyActivite myActivite =new MyActivite();
+                    myActivite.setDateActivity(String.valueOf(format.format(date)));
+                    myActivite.setDescription(editTextDesc.getText().toString());
+                    myActivite.setEtat(false);
+                    ArrayList<String> fil=new ArrayList<>();
+                   // ArrayList<FichierDistant> fil=new ArrayList<>();
+
+                    //   FichierDistant f1 =new FichierDistant();
+
+                    fil.add("fichier 1");
+                    fil.add("fichier 2");
+                    fil.add("fichier 3");
+                    myActivite.setListFiles(fil);
+                    databaseReference.push().setValue(myActivite);
                 }
             }
             );
@@ -190,10 +223,12 @@ StorageReference mStorage;
         if(resultCode==RESULT_OK){
             System.out.println("test1 toString"+data.getData().toString());
             System.out.println("test2 toString"+data.getType());
-           // System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+
+//            System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+
         if (requestCode==PDF){
                 if (data.getData()!= null){
-                    System.out.println( "faresssss"+data.getClipData().gettUri().getLastPathSegment().toString());
+                  //  System.out.println( "faresssss"+data.getClipData().gettUri().getLastPathSegment().toString());
                 uri=data.getData();
                 System.out.println(uri.toString());
                // upload();
@@ -204,7 +239,9 @@ StorageReference mStorage;
                     uri=data.getData();
                     System.out.println("test1 toString"+uri.toString());
                     System.out.println("test2 toString"+data.getType());
-                  //  System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+
+                   // System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+
 
                    // upload();
                 }
@@ -214,7 +251,7 @@ StorageReference mStorage;
                         uri = data.getData();
                         System.out.println("test1 toString"+uri.toString());
                         System.out.println("test2 toString"+data.getType());
-                        System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+                     //   System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
                         System.out.println(uri.toString());
                        // upload();
                     } else if (requestCode == VIDEO) {
@@ -223,7 +260,9 @@ StorageReference mStorage;
                             uri = data.getData();
                             System.out.println("test1 toString"+uri.toString());
                             System.out.println("test2 toString"+data.getType());
-                        //    System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+
+                  //          System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+
                             System.out.println(uri.toString());
                             //upload();
                         }
@@ -246,6 +285,11 @@ StorageReference mStorage;
                                                      public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                        uri = taskSnapshot.getUploadSessionUri();
                                                          Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
+                                                        System.out.println("mon uri 1 ="+uri.getPath());
+                                                         System.out.println("mon uri 2 ="+uri.getLastPathSegment());
+                                                         System.out.println("mon uri 3 ="+uri.toString());
+
+                                                         //System.out.println("mon uri 2 ="+uri.get());
 
 
                                                      }
@@ -256,6 +300,28 @@ StorageReference mStorage;
             Toast.makeText(getApplicationContext(), "Erreur lors de l'envoi du fichier"+e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public String hebdodate() {
         Calendar c = Calendar.getInstance();
