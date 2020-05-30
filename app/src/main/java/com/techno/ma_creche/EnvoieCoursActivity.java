@@ -149,6 +149,7 @@ StorageReference mStorage;
                     Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
                     // saisie dans la BDD
                     DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("activites");
+                    System.out.println("Test FFFF**:"+taskSnapshot.getMetadata().getName()+"   "+taskSnapshot.getMetadata().getSizeBytes()+"  "+taskSnapshot.getMetadata().getContentType());
 					HashMap<String,String> hashMap=new HashMap<>();
                     hashMap.put("dateActivity",String.valueOf(format.format(date)));
                     hashMap.put("description", String.valueOf(editTextDesc.getText()));
@@ -184,27 +185,32 @@ StorageReference mStorage;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+
         if(resultCode==RESULT_OK){
             System.out.println("test1 toString"+data.getData().toString());
             System.out.println("test2 toString"+data.getType());
-            System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+           // System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
         if (requestCode==PDF){
                 if (data.getData()!= null){
+                    System.out.println( "faresssss"+data.getClipData().gettUri().getLastPathSegment().toString());
                 uri=data.getData();
                 System.out.println(uri.toString());
                // upload();
                 }
            else if (requestCode==DOCX){
                 if (data.getData()!= null){
+                    System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
                     uri=data.getData();
                     System.out.println("test1 toString"+uri.toString());
                     System.out.println("test2 toString"+data.getType());
-                    System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+                  //  System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
 
                    // upload();
                 }
                else if (requestCode==AUDIO) {
                     if (data.getData() != null) {
+                        System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
                         uri = data.getData();
                         System.out.println("test1 toString"+uri.toString());
                         System.out.println("test2 toString"+data.getType());
@@ -213,17 +219,20 @@ StorageReference mStorage;
                        // upload();
                     } else if (requestCode == VIDEO) {
                         if (data.getData() != null) {
+                            System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
                             uri = data.getData();
                             System.out.println("test1 toString"+uri.toString());
                             System.out.println("test2 toString"+data.getType());
-                            System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
+                        //    System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
                             System.out.println(uri.toString());
                             //upload();
                         }
                     }
                 }
            }
-            }
+
+
+        }
         }
     }
 
