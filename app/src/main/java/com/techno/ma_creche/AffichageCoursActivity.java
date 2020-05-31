@@ -21,6 +21,8 @@ import com.google.firebase.storage.StorageReference;
 import com.techno.ma_creche.dao.FichierDistant;
 import com.techno.ma_creche.dao.MyActivite;
 
+import java.util.ArrayList;
+
 
 public class AffichageCoursActivity extends AppCompatActivity {
     FirebaseStorage storage;
@@ -35,8 +37,7 @@ public class AffichageCoursActivity extends AppCompatActivity {
     String activite;
     MyActivite myActivite;
      String[] myFiles;
-    ArrayList<FichierDistant> listfiles=new ArrayList<FichierDistant>();
-
+    ArrayList<FichierDistant> listfiles=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
