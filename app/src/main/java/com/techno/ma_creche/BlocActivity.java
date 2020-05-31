@@ -20,7 +20,7 @@ public class BlocActivity extends AppCompatActivity {
 CategirieUser cat;
 
     ImageView btnDes,btnAct,btnMus,btnDiv,btnCal,btnHist;
-    TextView txtDes,txtAct,txtMus,txtDiv,txtCal,txtHist;
+    TextView txtDes,txtAct,txtMus,txtDiv,txtCal,txtHist,textViewClasse;
     Button btnNouveauCour,btnDecon;
 
     @Override
@@ -29,10 +29,11 @@ CategirieUser cat;
         setContentView(R.layout.activity_bloc);
         this.btnAct=findViewById(R.id.imageViewActMan);
         this.btnDes=findViewById(R.id.imageViewDessin);
-
-
+        this.textViewClasse = findViewById(R.id.textViewClasse);
         this.btnDecon = findViewById(R.id.buttonDeconnexion);
         btnNouveauCour= findViewById(R.id.buttonNouveauCours);
+        String currentClasse = getIntent().getStringExtra("currentClasse");
+        this.textViewClasse.setText(currentClasse);
         if (cat.categorie.equals("enseignant")) {
             this.btnNouveauCour.setVisibility(View.VISIBLE);
             this.btnNouveauCour.setOnClickListener((View v)-> {

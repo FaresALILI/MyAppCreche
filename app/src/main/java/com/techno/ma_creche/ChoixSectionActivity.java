@@ -24,47 +24,49 @@ public class ChoixSectionActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this,BlocActivity.class);
         btnPs1.setOnClickListener(v->{
-            intent.putExtra("section","ps1");
+//            intent.putExtra("section","ps1");
+            intent.putExtra("currentClasse","PS CL1");
+
             startActivity(intent);
 
         });
         btnPs2.setOnClickListener(v->{
-            intent.putExtra("section","ps2");
+            intent.putExtra("currentClasse","PS CL2");
             startActivity(intent);
 
         });
         btnPs3.setOnClickListener(v->{
-            intent.putExtra("section","ps3");
+            intent.putExtra("currentClasse","PS CL3");
             startActivity(intent);
 
         });
         btnMs1.setOnClickListener(v->{
-            intent.putExtra("section","ms1");
+            intent.putExtra("currentClasse","MS CL1");
             startActivity(intent);
 
         });
         btnMs2.setOnClickListener(v->{
-            intent.putExtra("section","ms2");
+            intent.putExtra("currentClasse","MS CL2");
             startActivity(intent);
 
         });
         btnMs3.setOnClickListener(v->{
-            intent.putExtra("section","ms3");
+            intent.putExtra("currentClasse","MS CL3");
             startActivity(intent);
 
         });
         btnGs1.setOnClickListener(v->{
-            intent.putExtra("section","gs1");
+            intent.putExtra("currentClasse","GS CL1");
             startActivity(intent);
 
         });
         btnGs2.setOnClickListener(v->{
-            intent.putExtra("section","ps2");
+            intent.putExtra("currentClasse","GS CL2");
             startActivity(intent);
 
         });
         btnGs3.setOnClickListener(v->{
-            intent.putExtra("section","gs3");
+            intent.putExtra("currentClasse","GS CL3");
             startActivity(intent);
 
         });
