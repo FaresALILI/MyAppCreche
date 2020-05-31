@@ -70,15 +70,21 @@
                 android:id="@+id/buttonParent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="2px"
                 android:layout_weight="1"
-                android:text="Je suis un parent" />
+                android:background="#70FF40"
+                android:text="Je suis un parent"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/butonEnseignant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="2px"
                 android:layout_weight="1"
-                android:text="Je suis un enseignant" />
+                android:background="#FFA726"
+                android:text="Je suis un enseignant"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
