@@ -46,9 +46,10 @@ String userID;
             editmotpass=findViewById(R.id.editPass);
             cat.login=editlogin.getText().toString();
             cat.motpass=editmotpass.getText().toString();
-            String login=editlogin.getText().toString();
-            String motpass=editmotpass.getText().toString();
-
+           // String login=editlogin.getText().toString();
+            //String motpass=editmotpass.getText().toString();
+            String   login ="lamine1305@gmail.com";
+            String  motpass="1234567";
             if(TextUtils.isEmpty(login)) {
                 this.editlogin.setError("le login doit etre renseigné");
                 return;
@@ -74,7 +75,7 @@ String userID;
                     //Enregistrement en base de données
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("utilisateurs");
                     User us= new User();
-                    us.setLogin(login);
+                    us.setLogin("lamine1305@gmail.com");
                     us.setPassword(motpass);
                     us.setDateCreation(new Date());
                     //ref.push().setValue(us);

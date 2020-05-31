@@ -2,7 +2,7 @@ package com.techno.ma_creche.dao;
 
 import java.io.Serializable;
 
-public class FichierDistant  {
+public class FichierDistant implements Serializable {
     String link;
     String description;
     String typeActivity;

@@ -1,6 +1,9 @@
 package com.techno.ma_creche.dao;
 
-public class MyActivite {
+import java.io.Serializable;
+import java.util.Collection;
+
+public class MyActivite implements Serializable {
 
     String idActivity;
     String dateActivity;
@@ -15,9 +18,11 @@ public class MyActivite {
         this.typeActivity = typeActivity;
     }
 
+    Collection<FichierDistant>listFiles;
 
 
     public MyActivite(String dateActivity, String description,String typeActivity) {
+
         this.dateActivity = dateActivity;
         this.description = description;
         this.typeActivity = typeActivity;
@@ -55,6 +60,14 @@ public class MyActivite {
 
     public void setIdActivity(String idActivity) {
         this.idActivity = idActivity;
+    }
+
+    public Collection<FichierDistant> getListFiles() {
+        return listFiles;
+    }
+
+    public void setListFiles(Collection<FichierDistant> listFiles) {
+        this.listFiles = listFiles;
     }
 
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/fondecran"
@@ -21,7 +22,7 @@
                 android:layout_height="37dp"
                 android:layout_weight="1"
                 android:background="#FF9100"
-                android:text="Deconnexion" />>
+                android:text="Deconnexion" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,9 +58,11 @@
                     android:gravity="start|top"
                     android:inputType="textMultiLine" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="343dp"
-                android:layout_height="127dp"
+                android:layout_height="193dp"
+
                 android:background="@drawable/fondecran"
                 android:orientation="vertical">
 
@@ -79,33 +82,23 @@
                     android:text="Statut : Non vue" />
 
                 <ListView
-                    android:layout_width="268dp"
-                    android:layout_height="65dp"
+                    android:id="@+id/listViewFichier"
+                    android:layout_width="245dp"
+                    android:layout_height="108dp"
                     android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/buttonTelecharger"
+                    android:layout_width="67dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:text="telecharger"
+                    android:textColor="#692121"
+                    android:textSize="8dp" />
             </LinearLayout>
 
-
-
-            <LinearLayout
-                android:layout_width="343dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <Button
-                android:id="@+id/buttonVlider"
-                android:layout_width="286dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#00FF55"
-                android:inputType="textVisiblePassword"
-                android:text="Passer l'activité à Vue"
-                android:visibility="visible" />
-
-        </LinearLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+</LinearLayout>
+
