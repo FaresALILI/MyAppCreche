@@ -144,6 +144,8 @@ StorageReference mStorage;
 
     private void envoieCours(View v) {
         // uploadFile
+        int radioId= typeActivity.getCheckedRadioButtonId();
+        this.selectedActivity =findViewById(radioId);
         String storage=selectedActivity.getText().toString();
         StorageReference folder=mStorage.child("ResMyAppCreche").child(storage).child(uri.getLastPathSegment());
         try{
@@ -156,8 +158,21 @@ StorageReference mStorage;
                     DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
                     Date date=new Date();
                     System.out.println("mon uri 1 ="+taskSnapshot.getMetadata().getContentType());
-                    System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getName());
+                    System.out.println("mon uri 3 ="+taskSnapshot.getStorage().getPath());
+                    System.out.println("mon uri 4 ="+taskSnapshot.getStorage().getName());
+
+                    System.out.println("mon uri 6 ="+taskSnapshot.getStorage().getParent().getStream().toString());
+                    System.out.println("mon uri 6 ="+taskSnapshot.getStorage().getParent().getName());
+                    System.out.println("mon uri 6 ="+taskSnapshot.getStorage().getParent().getDownloadUrl().toString());
+                    System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getContentLanguage());
                     System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getSizeBytes()/1000 +"Mo");
+
+
+//                        System.out.println("mon ddduri 2 ="+taskSnapshot.getMetadata().getReference().getDownloadUrl().getResult().toString());
+                        //System.out.println("mon ddduri 2 ="+taskSnapshot.getStorage().getDownloadUrl().getResult().toString());
+                    System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                   // System.out.println("mon uri 2 ="+folder.getMetadata().getResult().toString());
+
                     System.out.println("Test FFFF**:"+taskSnapshot.getMetadata().getName()+"   "+taskSnapshot.getMetadata().getSizeBytes()+"  "+taskSnapshot.getMetadata().getContentType());
                     Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
                     // saisie dans la BDD
@@ -181,14 +196,28 @@ StorageReference mStorage;
                     myActivite.setDateActivity(String.valueOf(format.format(date)));
                     myActivite.setDescription(editTextDesc.getText().toString());
                     myActivite.setEtat(false);
-                    ArrayList<String> fil=new ArrayList<>();
+
+                   // ArrayList<String> fil=new ArrayList<>();
                    // ArrayList<FichierDistant> fil=new ArrayList<>();
 
                     //   FichierDistant f1 =new FichierDistant();
 
-                    fil.add("fichier 1");
-                    fil.add("fichier 2");
-                    fil.add("fichier 3");
+                    ArrayList<FichierDistant> fil=new ArrayList<>();
+                    FichierDistant f1 =new FichierDistant();
+                    f1.setNomFile(taskSnapshot.getMetadata().getName());
+                    f1.setExtFile(taskSnapshot.getMetadata().getContentType().toString());
+                    f1.setLink("www.link.comfff à faire dynamiquement si possible");
+                    f1.setTypeActivity(String.valueOf(selectedActivity.getText()));
+                    FichierDistant f2 =new FichierDistant();
+                    //f2.setDescription(editTextDesc.getText().toString());
+                    f2.setExtFile(".pdf");
+                    f2.setLink("www.link2.com");
+                    f2.setTypeActivity("Dessin");
+
+                    fil.add(f1);
+                    fil.add(f2);
+
+
                     myActivite.setListFiles(fil);
                     databaseReference.push().setValue(myActivite);
                 }
@@ -221,8 +250,10 @@ StorageReference mStorage;
 
 
         if(resultCode==RESULT_OK){
-            System.out.println("test1 toString"+data.getData().toString());
-            System.out.println("test2 toString"+data.getType());
+            System.out.println("test11 toString"+data.getData().toString());
+            System.out.println("test22 toString"+data.getType());
+//           System.out.println("test33 toString"+data.getClipData().getDescription());
+//            System.out.println("test44 toString"+data.getClipData().toString());
 
 //            System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
 
@@ -235,7 +266,7 @@ StorageReference mStorage;
                 }
            else if (requestCode==DOCX){
                 if (data.getData()!= null){
-                    System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
+                   // System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
                     uri=data.getData();
                     System.out.println("test1 toString"+uri.toString());
                     System.out.println("test2 toString"+data.getType());
@@ -247,7 +278,7 @@ StorageReference mStorage;
                 }
                else if (requestCode==AUDIO) {
                     if (data.getData() != null) {
-                        System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
+                      //  System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
                         uri = data.getData();
                         System.out.println("test1 toString"+uri.toString());
                         System.out.println("test2 toString"+data.getType());
@@ -256,7 +287,7 @@ StorageReference mStorage;
                        // upload();
                     } else if (requestCode == VIDEO) {
                         if (data.getData() != null) {
-                            System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
+                         //   System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
                             uri = data.getData();
                             System.out.println("test1 toString"+uri.toString());
                             System.out.println("test2 toString"+data.getType());
@@ -274,7 +305,7 @@ StorageReference mStorage;
         }
         }
     }
-
+/*
     private void upload() {
         String storage=selectedActivity.getText().toString();
 
@@ -285,7 +316,7 @@ StorageReference mStorage;
                                                      public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                        uri = taskSnapshot.getUploadSessionUri();
                                                          Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
-                                                        System.out.println("mon uri 1 ="+uri.getPath());
+                                                         System.out.println("mon uri 1 ="+uri.getPath());
                                                          System.out.println("mon uri 2 ="+uri.getLastPathSegment());
                                                          System.out.println("mon uri 3 ="+uri.toString());
 
@@ -300,24 +331,7 @@ StorageReference mStorage;
             Toast.makeText(getApplicationContext(), "Erreur lors de l'envoi du fichier"+e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 
 
