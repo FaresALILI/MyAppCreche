@@ -181,10 +181,9 @@ StorageReference mStorage;
                     DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("activites");
 
                     System.out.println("Test FFFF**:"+taskSnapshot.getMetadata().getName()+"   "+taskSnapshot.getMetadata().getSizeBytes()+"  "+taskSnapshot.getMetadata().getContentType());
-					HashMap<String,String> hashMap=new HashMap<>();
 
+					//HashMap<String,String> hashMap=new HashMap<>();
 /*					HashMap<String,Object> hashMap=new HashMap<>();
-
                     hashMap.put("dateActivity",String.valueOf(format.format(date)));
                     hashMap.put("description", String.valueOf(editTextDesc.getText()));
                     hashMap.put("typeActivity", String.valueOf(selectedActivity.getText()));
@@ -211,16 +210,18 @@ StorageReference mStorage;
                     f1.setExtFile(taskSnapshot.getMetadata().getContentType().toString());
                     f1.setLink("www.link.comfff à faire dynamiquement si possible");
                     f1.setTypeActivity(String.valueOf(selectedActivity.getText()));
+
+                   // ArrayList<FichierDistant> fil=new ArrayList<>();
                     FichierDistant f2 =new FichierDistant();
-                    //f2.setDescription(editTextDesc.getText().toString());
-                    f2.setExtFile(".pdf");
-                    f2.setLink("www.link2.com");
-                    f2.setTypeActivity("Dessin");
+                    f2.setNomFile(taskSnapshot.getMetadata().getName());
+                    f2.setExtFile(taskSnapshot.getMetadata().getContentType().toString());
+                    f2.setLink("www.link.comfff à faire dynamiquement si possible");
+                    f2.setTypeActivity(String.valueOf(selectedActivity.getText()));
+
 
                     fil.add(f1);
                     fil.add(f2);
-
-
+                    System.out.println("size: "+fil.size());
                     myActivite.setListFiles(fil);
                     databaseReference.push().setValue(myActivite);
                 }
