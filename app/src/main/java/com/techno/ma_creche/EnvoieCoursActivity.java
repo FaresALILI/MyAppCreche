@@ -57,6 +57,7 @@ StorageReference mStorage;
     RadioButton selectedActivity;
     CategirieUser cat;
     EditText editTextDesc;
+    EditText editTextObjet;
     TextView txtVwNotification;
     ProgressDialog progressDialog;
 
@@ -92,6 +93,7 @@ StorageReference mStorage;
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Processing Please Wait.....");
         this.editTextDesc = findViewById(R.id.editTextDescription);
+        this.editTextObjet = findViewById(R.id.editTextObjet);
         this. btnDecon= findViewById(R.id.buttonDeconnexion);
         this.btnEnvoiCours =  findViewById(R.id.buttonVlider);
         this.btnUpload =  findViewById(R.id.buttonUpload);
@@ -194,6 +196,7 @@ StorageReference mStorage;
 
                     MyActivite myActivite =new MyActivite();
                     myActivite.setDateActivity(String.valueOf(format.format(date)));
+                    myActivite.setObjet(editTextObjet.getText().toString());
                     myActivite.setDescription(editTextDesc.getText().toString());
                     myActivite.setEtat(false);
 

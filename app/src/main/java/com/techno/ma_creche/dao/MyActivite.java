@@ -7,39 +7,41 @@ public class MyActivite {
     String idActivity;
     String dateActivity;
     String description;
-    String objetActivity;
+    String objet;
     boolean etat;
+
+
 
     //Collection<String>listFiles;
     Collection<FichierDistant>listFiles;
 
-    public MyActivite(String dateActivity, String description) {
+    public MyActivite(String dateActivity, String description,String objet) {
         this.dateActivity = dateActivity;
         this.description = description;
+        this.objet = objet;
         this.etat=false;
     }
+
+    public String getObjet() { return objet; }
+    public void setObjet(String objet) { this.objet = objet; }
     public boolean isEtat() {
         return etat;
     }
-
     public void setEtat(boolean etat) {
         this.etat = etat;
     }
-    public MyActivite() {
-    }
+
+    public MyActivite() { }
 
     public void setDateActivity(String dateActivity) {
         this.dateActivity = dateActivity;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public String getDateActivity() {
         return dateActivity;
     }
-
     public String getDescription() {
         return description;
     }
