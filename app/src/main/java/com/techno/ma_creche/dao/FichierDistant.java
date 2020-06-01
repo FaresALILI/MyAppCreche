@@ -4,17 +4,22 @@ import java.io.Serializable;
 
 public class FichierDistant implements Serializable {
     String link;
-    String description;
+    String nomFile;
     String typeActivity;
     String extFile;
+
+    public String getNomFile() {
+        return nomFile;
+    }
+
+    public void setNomFile(String nomFile) {
+        this.nomFile = nomFile;
+    }
 
     public void setLink(String link) {
         this.link = link;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public void setTypeActivity(String typeActivity) {
         this.typeActivity = typeActivity;
@@ -28,21 +33,17 @@ public class FichierDistant implements Serializable {
         return link;
     }
 
-    public String getDescription() {
-        return description;
-    }
+
 
     public String getTypeActivity() {
         return typeActivity;
     }
-
     public String getExtFile() {
         return extFile;
     }
-
-    public FichierDistant(String link, String description, String typeActivity, String extFile) {
+    public FichierDistant(String link, String nomFile, String typeActivity, String extFile) {
         this.link = link;
-        this.description = description;
+        this.nomFile = nomFile;
         this.typeActivity = typeActivity;
         this.extFile = extFile;
     }
