@@ -42,13 +42,14 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class EnvoieCoursActivity extends AppCompatActivity {
-int PDF=0;
-int DOCX =1;
-int AUDIO=2;
+    int PDF=0;
+    int DOCX =1;
+    int AUDIO=2;
     int VIDEO= 3;
-        private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    int j;
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     Uri uri;
-StorageReference mStorage;
+    StorageReference mStorage;
     Button btnDecon;
     Button btnEnvoiCours;
     Button btnSelectFile;
@@ -60,10 +61,8 @@ StorageReference mStorage;
     EditText editTextObjet;
     TextView txtVwNotification;
     ProgressDialog progressDialog;
-
     private static final int PICK_FILE=1;
     ArrayList<Uri> FilList=new ArrayList<Uri>();
-
     FirebaseAuth fireAuth;
 
     @Override
@@ -71,24 +70,20 @@ StorageReference mStorage;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_envoie_cours);
 
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Here, thisActivity is the current activity
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                         Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 } else {
-                    // No explanation needed; request the permission
                     ActivityCompat.requestPermissions(this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                             1000);
                 }
             } else {
             }
-
         }
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Processing Please Wait.....");
@@ -96,7 +91,6 @@ StorageReference mStorage;
         this.editTextObjet = findViewById(R.id.editTextObjet);
         this. btnDecon= findViewById(R.id.buttonDeconnexion);
         this.btnEnvoiCours =  findViewById(R.id.buttonVlider);
-        this.btnUpload =  findViewById(R.id.buttonUpload);
         this.btnSelectFile =  findViewById(R.id.buttonSelectFile);
         this.typeActivity =  findViewById(R.id.typeActivity);
         int radioId= typeActivity.getCheckedRadioButtonId();
@@ -110,126 +104,58 @@ StorageReference mStorage;
             }
         });
 
-        this.btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               //uploadFile(v);
-            }
-        });
         fireAuth = FirebaseAuth.getInstance();
-
-
         this.txtVwNotification =  findViewById(R.id.textViewNotification);
         this.btnEnvoiCours.setOnClickListener(v->{
-            if(this.editTextDesc.getText().toString().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Veuillez saisir une description",Toast.LENGTH_LONG).show();
+            if(this.editTextDesc.getText().toString().isEmpty() || this.editTextObjet.getText().toString().isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Merci de remplire  les parties ayant *",Toast.LENGTH_LONG).show();
             }
             else{
-                //Envoi du cours ....
-                envoieCours(v);
+                     envoieCours(v);
             }
         });
-
 
         this.btnDecon.setOnClickListener((View v)->
                 {
-                    /*
-                    //this.cat.deconnexion();
+                    this.cat.deconnexion();
                     FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
-                    */
-                    //download("Dessin");
                 }
         );
     }
 
     private void envoieCours(View v) {
-        // uploadFile
         int radioId= typeActivity.getCheckedRadioButtonId();
         this.selectedActivity =findViewById(radioId);
         String storage=selectedActivity.getText().toString();
-        StorageReference folder=mStorage.child("ResMyAppCreche").child(storage).child(uri.getLastPathSegment());
-        try{
-            //envoie
-            folder.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    //ecriture dans la bdd
-                    uri = taskSnapshot.getUploadSessionUri();
-                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
-                    Date date=new Date();
-                    System.out.println("mon uri 1 ="+taskSnapshot.getMetadata().getContentType());
-                    System.out.println("mon uri 3 ="+taskSnapshot.getStorage().getPath());
-                    System.out.println("mon uri 4 ="+taskSnapshot.getStorage().getName());
-
-                    System.out.println("mon uri 6 ="+taskSnapshot.getStorage().getParent().getStream().toString());
-                    System.out.println("mon uri 6 ="+taskSnapshot.getStorage().getParent().getName());
-                    System.out.println("mon uri 6 ="+taskSnapshot.getStorage().getParent().getDownloadUrl().toString());
-                    System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getContentLanguage());
-                    System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getSizeBytes()/1000 +"Mo");
-
-
-//                        System.out.println("mon ddduri 2 ="+taskSnapshot.getMetadata().getReference().getDownloadUrl().getResult().toString());
-                        //System.out.println("mon ddduri 2 ="+taskSnapshot.getStorage().getDownloadUrl().getResult().toString());
-                    System.out.println("mon uri 2 ="+taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-                   // System.out.println("mon uri 2 ="+folder.getMetadata().getResult().toString());
-
-                    System.out.println("Test FFFF**:"+taskSnapshot.getMetadata().getName()+"   "+taskSnapshot.getMetadata().getSizeBytes()+"  "+taskSnapshot.getMetadata().getContentType());
-                    Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
-                    // saisie dans la BDD
-                    DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("activites");
-
-                    System.out.println("Test FFFF**:"+taskSnapshot.getMetadata().getName()+"   "+taskSnapshot.getMetadata().getSizeBytes()+"  "+taskSnapshot.getMetadata().getContentType());
-
-					//HashMap<String,String> hashMap=new HashMap<>();
-/*					HashMap<String,Object> hashMap=new HashMap<>();
-                    hashMap.put("dateActivity",String.valueOf(format.format(date)));
-                    hashMap.put("description", String.valueOf(editTextDesc.getText()));
-                    hashMap.put("typeActivity", String.valueOf(selectedActivity.getText()));
-                    hashMap.put("etat", false);
-                    hashMap.put("nomFile", String.valueOf(uri));
-                    hashMap.put("link", String.valueOf(uri));
-                    databaseReference.push().setValue(hashMap);
-*/
-
-                    MyActivite myActivite =new MyActivite();
-                    myActivite.setDateActivity(String.valueOf(format.format(date)));
-                    myActivite.setObjet(editTextObjet.getText().toString());
-                    myActivite.setDescription(editTextDesc.getText().toString());
-                    myActivite.setEtat(false);
-
-                   // ArrayList<String> fil=new ArrayList<>();
-                   // ArrayList<FichierDistant> fil=new ArrayList<>();
-
-                    //   FichierDistant f1 =new FichierDistant();
-
-                    ArrayList<FichierDistant> fil=new ArrayList<>();
-                    FichierDistant f1 =new FichierDistant();
-                    f1.setNomFile(taskSnapshot.getMetadata().getName());
-                    f1.setExtFile(taskSnapshot.getMetadata().getContentType().toString());
-                    f1.setLink("www.link.comfff à faire dynamiquement si possible");
-                    f1.setTypeActivity(String.valueOf(selectedActivity.getText()));
-
-                   // ArrayList<FichierDistant> fil=new ArrayList<>();
-                    FichierDistant f2 =new FichierDistant();
-                    f2.setNomFile(taskSnapshot.getMetadata().getName());
-                    f2.setExtFile(taskSnapshot.getMetadata().getContentType().toString());
-                    f2.setLink("www.link.comfff à faire dynamiquement si possible");
-                    f2.setTypeActivity(String.valueOf(selectedActivity.getText()));
-
-
-                    fil.add(f1);
-                    fil.add(f2);
-                    System.out.println("size: "+fil.size());
-                    myActivite.setListFiles(fil);
-                    databaseReference.push().setValue(myActivite);
-                }
-            }
-            );
-        }catch(Exception e)
-        {
-            Toast.makeText(getApplicationContext(), "Erreur lors de l'envoi du fichier"+e.getMessage(),Toast.LENGTH_LONG).show();
+        ArrayList<FichierDistant> fil = new ArrayList<>();
+        for (j=0;j<FilList.size();j++) {
+            Uri PerFile = FilList.get(j);
+            StorageReference folder = mStorage.child("ResMyAppCreche").child(storage).child(PerFile.getLastPathSegment());
+            folder.putFile(PerFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                       DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+                       Date date = new Date();
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("activites");
+                        System.out.println("Test FFFF**:" + taskSnapshot.getMetadata().getName() + "   " + taskSnapshot.getMetadata().getSizeBytes() + "  " + taskSnapshot.getMetadata().getContentType());
+                        MyActivite myActivite = new MyActivite();
+                        myActivite.setDateActivity(String.valueOf(format.format(date)));
+                        myActivite.setObjet(editTextObjet.getText().toString());
+                        myActivite.setDescription(editTextDesc.getText().toString());
+                        myActivite.setEtat(false);
+                        FichierDistant f1 = new FichierDistant();
+                        f1.setNomFile(taskSnapshot.getMetadata().getName());
+                        f1.setExtFile(taskSnapshot.getMetadata().getContentType().toString());
+                        f1.setLink("www.link.comfff à faire dynamiquement si possible");
+                        f1.setTypeActivity(String.valueOf(selectedActivity.getText()));
+                        fil.add(f1);
+                        if (j== fil.size()) {
+                        myActivite.setListFiles(fil);
+                        databaseReference.push().setValue(myActivite);}
+                    }
+            });
         }
     }
 
@@ -242,7 +168,6 @@ StorageReference mStorage;
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         checkButton(view);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-       // startActivityForResult(intent,PICK_FILE);
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"select file"),0);
@@ -251,95 +176,20 @@ StorageReference mStorage;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
         if(resultCode==RESULT_OK){
-            System.out.println("test11 toString"+data.getData().toString());
-            System.out.println("test22 toString"+data.getType());
-//           System.out.println("test33 toString"+data.getClipData().getDescription());
-//            System.out.println("test44 toString"+data.getClipData().toString());
-
-//            System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
-
-        if (requestCode==PDF){
-                if (data.getData()!= null){
-                  //  System.out.println( "faresssss"+data.getClipData().gettUri().getLastPathSegment().toString());
-                uri=data.getData();
-                System.out.println(uri.toString());
-               // upload();
+            if (data.getClipData()!= null){
+                int count=data.getClipData().getItemCount();
+                int i=0;
+                while (i<count){
+                    Uri File=data.getClipData().getItemAt(i).getUri();
+                    FilList.add(File);
+                    i++;
                 }
-           else if (requestCode==DOCX){
-                if (data.getData()!= null){
-                   // System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
-                    uri=data.getData();
-                    System.out.println("test1 toString"+uri.toString());
-                    System.out.println("test2 toString"+data.getType());
-
-                   // System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
-
-
-                   // upload();
-                }
-               else if (requestCode==AUDIO) {
-                    if (data.getData() != null) {
-                      //  System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
-                        uri = data.getData();
-                        System.out.println("test1 toString"+uri.toString());
-                        System.out.println("test2 toString"+data.getType());
-                     //   System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
-                        System.out.println(uri.toString());
-                       // upload();
-                    } else if (requestCode == VIDEO) {
-                        if (data.getData() != null) {
-                         //   System.out.println( "faresssss"+data.getClipData().getItemAt(0).getUri().getLastPathSegment().toString());
-                            uri = data.getData();
-                            System.out.println("test1 toString"+uri.toString());
-                            System.out.println("test2 toString"+data.getType());
-
-                  //          System.out.println("test3 toString"+data.getClipData().getItemAt(0).getUri());
-
-                            System.out.println(uri.toString());
-                            //upload();
-                        }
-                    }
-                }
-           }
-
-
-        }
+                System.out.println("Test FilList.size()"+FilList.size());
+                Toast.makeText(this,"You have selected "+ FilList.size()+" Files", Toast.LENGTH_LONG).show();
+            }
         }
     }
-/*
-    private void upload() {
-        String storage=selectedActivity.getText().toString();
-
-        StorageReference folder=mStorage.child("ResMyAppCreche").child(storage).child(uri.getLastPathSegment());
-        try{
-        folder.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                                     @Override
-                                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                       uri = taskSnapshot.getUploadSessionUri();
-                                                         Toast.makeText(getApplicationContext(), uri.toString(),Toast.LENGTH_LONG).show();
-                                                         System.out.println("mon uri 1 ="+uri.getPath());
-                                                         System.out.println("mon uri 2 ="+uri.getLastPathSegment());
-                                                         System.out.println("mon uri 3 ="+uri.toString());
-
-                                                         //System.out.println("mon uri 2 ="+uri.get());
-
-
-                                                     }
-                                                 }
-            );
-    }catch(Exception e)
-        {
-            Toast.makeText(getApplicationContext(), "Erreur lors de l'envoi du fichier"+e.getMessage(),Toast.LENGTH_LONG).show();
-        }
-    }
-*/
-
-
-
-
 
     public String hebdodate() {
         Calendar c = Calendar.getInstance();
@@ -349,8 +199,6 @@ StorageReference mStorage;
         int d=c.get(c.MONTH)+1;
         return c.get(Calendar.DAY_OF_MONTH)+"_"+d+"_"+c.get(Calendar.YEAR);
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -366,5 +214,4 @@ StorageReference mStorage;
             }
         }
     }
-
 }
