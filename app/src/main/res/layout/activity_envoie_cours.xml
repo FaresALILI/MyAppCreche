@@ -89,7 +89,7 @@
                     android:layout_height="31dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Objet Acts"
+                    android:text="Objet Acts *"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Description"
+                    android:text="Description *"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -136,13 +136,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
-
-                <Button
-                    android:id="@+id/buttonUpload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Upload" />
 
                 <TextView
                     android:id="@+id/textViewNotification"
