@@ -23,10 +23,10 @@ import com.techno.ma_creche.dao.MyActivite;
 
 import java.util.ArrayList;
 
-
 public class AffichageCoursActivity extends AppCompatActivity {
     FirebaseStorage storage;
     EditText editTextDescription;
+    EditText editTextObjet;
     TextView textViewDateEnvoi;
     TextView textViewStatut;
     ArrayAdapter<String> arrayAdapter;
@@ -45,48 +45,41 @@ public class AffichageCoursActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("activites");
         reference = FirebaseStorage.getInstance();
         this.editTextDescription = findViewById(R.id.editTextDescription);
+        this.editTextObjet = findViewById(R.id.editTextObjet);
         this.textViewDateEnvoi = findViewById(R.id.textViewDateEnvoi);
         this.textViewStatut = findViewById(R.id.textViewStatut);
         this.buttonTelecharger = findViewById(R.id.buttonTelecharger);
         this.listViewFichier = findViewById(R.id.listViewFichier);
         this.activite = "Dessin";
         myFiles = new String[100];
-
         myActivite = new MyActivite();
         myActivite = (MyActivite) getIntent().getSerializableExtra("currentActivity");
-
         textViewDateEnvoi.setText(myActivite.getDateActivity());
         editTextDescription.setText(myActivite.getDescription());
+        editTextObjet.setText(myActivite.getObjet());
 
         if (myActivite.isEtat())
             textViewStatut.setText("Finalisée" + " OUI");
         else
             textViewStatut.setText("Finalisée" + " NON");
 
-        System.out.println("---->" + myActivite.getListFiles().size());
         Object[] tabObj = myActivite.getListFiles().toArray();
-        System.out.println("taille du tableau" + tabObj.length);
 
         for (int i = 0; i < tabObj.length; i++) {
-            String nomFile = tabObj[i].toString().split("nomFile=")[1].split(",")[0];
-            System.out.println("link des fichiers ... " + nomFile);
-            myFiles[i] = nomFile;
+            String nomFile = tabObj[i].toString().split("nomFile=")[1].split(",")[0];//.split("}")[0];
+                 myFiles[i] = nomFile;
             FichierDistant fd = new FichierDistant();
             fd.setLink(nomFile);
-            //fd.setExtension ()      }
             listfiles.add(fd);
             int taille = 0;
-            System.out.println("*******************");
             for (String s : myFiles) {
                 if (s != null)
                     taille++;
             }
-            System.out.println("*****" + taille + "  ******");
             String[] myFilessRelle = new String[taille];
             int j = 0;
             for (String s : myFiles) {
                 if (s != null) {
-                    System.out.println("s=  " + s);
                     myFilessRelle[j] = s;
                     j++;
                 }
@@ -100,14 +93,11 @@ public class AffichageCoursActivity extends AppCompatActivity {
                     //Lancement du téléchargement des pièces jointes
                     for (int k = 0; k < this.listfiles.size(); k++) {
                         download(this.activite, this.listfiles.get(k).getLink(), this.listfiles.get(k).getExtFile());
-
                     }
                 }
-
             });
         }
     }
-
 
     private void download(String activite,String nomFichier,String extension) {
         StorageReference storageReference =storage.getInstance().getReference().child("ResMyAppCreche").child(activite);
@@ -128,5 +118,4 @@ public class AffichageCoursActivity extends AppCompatActivity {
         request.setDestinationInExternalFilesDir(context,destination,fileName+extension);
         downloadManager.enqueue(request);
     }
-
 }

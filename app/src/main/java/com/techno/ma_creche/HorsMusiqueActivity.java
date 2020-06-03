@@ -62,81 +62,52 @@ public class HorsMusiqueActivity extends AppCompatActivity {
 
         // th.start();
         calendarView.setOnDateChangeListener((cal, y, m, d) -> {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    myActivity = new MyActivite();
+                    myActivity.setListFiles((Collection<FichierDistant>) snap.child("listFiles").getValue());
+                    myActivity.setEtat((Boolean) snap.child("etat").getValue());
+                    myActivity.setDescription((String) snap.child("description").getValue());
+                    myActivity.setDateActivity((String) snap.child("dateActivity").getValue());
+                    myActivity.setObjet((String) snap.child("objet").getValue());
+                    myActivity.setIdActivity(snap.getKey());
+                    //myActivities[i] = myActivity.getDateActivity().toString() + " / " + myActivity.getDescription().toString();
+                    mesActivities[i]=myActivity;
+                    i++;
+                }
+                int taille = 0;
+                for (MyActivite s : mesActivities) {
+                    if (s != null)
+                        taille++;
+                }
+               String[] myActivitiesRelle = new String[taille];
+                int j = 0;
+                for (MyActivite s : mesActivities) {
+                    if (s != null) {
+                        myActivitiesRelle[j] = s.getDateActivity()+"/"+s.getDescription();
+                        j++;
+                    }
+                }
+                arrayAdapter = new ArrayAdapter<String>(HorsMusiqueActivity.this, android.R.layout.simple_list_item_1, myActivitiesRelle);
+                sp.setAdapter(arrayAdapter);
+            }
 
-
-
-
-
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                            int i = 0;
-                                                            for (DataSnapshot snap : dataSnapshot.getChildren()) {
-
-
-                                                                System.out.println("count" +snap.child("listFiles").getValue().toString());
-                                                                myActivity = new MyActivite();
-                                                                myActivity.setListFiles((Collection<FichierDistant>) snap.child("listFiles").getValue());
-                                                                myActivity.setEtat((Boolean) snap.child("etat").getValue());
-                                                                myActivity.setDescription((String) snap.child("description").getValue());
-                                                                myActivity.setDateActivity((String) snap.child("dateActivity").getValue());
-
-                                                                myActivity.setIdActivity(snap.getKey());
-                                                                //myActivities[i] = myActivity.getDateActivity().toString() + " / " + myActivity.getDescription().toString();
-                                                                mesActivities[i]=myActivity;
-                                                                //System.out.println("la cle=" + snap.getKey() + "--->" + myActivity.getIdActivity());
-                                                                i++;
-                                                            }
-                                                            int taille = 0;
-                                                            System.out.println("*******************");
-                                                            for (MyActivite s : mesActivities) {
-                                                                if (s != null)
-                                                                    taille++;
-                                                            }
-                                                            System.out.println("*****" + taille+"  ******");
-                                                            String[] myActivitiesRelle = new String[taille];
-                                                            int j = 0;
-                                                            for (MyActivite s : mesActivities) {
-                                                                if (s != null) {
-                                                                    System.out.println("s=  "+s.getIdActivity());
-                                                                    myActivitiesRelle[j] = s.getDateActivity()+"/"+s.getDescription();
-                                                                    j++;
-                                                                }
-                                                            }
-                                                            arrayAdapter = new ArrayAdapter<String>(HorsMusiqueActivity.this, android.R.layout.simple_list_item_1, myActivitiesRelle);
-                                                            sp.setAdapter(arrayAdapter);
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                        }
-                                                    }
-
-            );
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        } );
             String date = "date = " + d + "_" + (m + 1) + "_" + y;
             getListeCours(date);
-            System.out.println("date = " + d + "_" + (m + 1) + "_" + y);
             sp.setAdapter(arrayAdapter);
         });
 
         sp.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(this, AffichageCoursActivity.class);
-            // intent.putExtra("currentActivity",)
             startActivity(intent);
-
-
-
-
-
-
-
-
-
         });
-
-
-        //ssp.setAdapter(model);
         this.btnDecon.setOnClickListener((View v) ->
                 {
                     this.cat.deconnexion();
@@ -148,7 +119,6 @@ public class HorsMusiqueActivity extends AppCompatActivity {
         sp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("--ADAM ->"+position+"//"+mesActivities[position].getIdActivity());
                 Intent intent = new Intent(HorsMusiqueActivity.this, AffichageCoursActivity.class);
                 MyActivite myActivite = mesActivities[position];
                 intent.putExtra("currentActivity",(Serializable)(myActivite));

@@ -38,7 +38,6 @@ CategirieUser cat;
             this.btnNouveauCour.setVisibility(View.VISIBLE);
             this.btnNouveauCour.setOnClickListener((View v)-> {
                 Intent intent = new Intent(this, EnvoieCoursActivity.class);
-                System.out.println("test dans btnNouveauCour ");
                 startActivity(intent);
             });
         }
@@ -119,7 +118,6 @@ CategirieUser cat;
 
         this.btnDiv.setOnClickListener(v->
         {
-            System.out.println("je suis dans la partie dessin enseignant bloc"  );
             Intent intent = new Intent(this, HorsMusiqueActivity.class);
             intent.putExtra("categorie", "enseignant");
             intent.putExtra("activite", "divers");
@@ -128,7 +126,6 @@ CategirieUser cat;
 
         this.btnMus.setOnClickListener(v->
         {
-            System.out.println("je suis dans la partie dessin enseignant bloc"  );
             Intent intent = new Intent(this, HorsMusiqueActivity.class);
             intent.putExtra("categorie", "enseignant");
             intent.putExtra("activite", "musique");

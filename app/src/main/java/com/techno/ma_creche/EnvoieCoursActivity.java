@@ -139,7 +139,6 @@ public class EnvoieCoursActivity extends AppCompatActivity {
                        DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
                        Date date = new Date();
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("activites");
-                        System.out.println("Test FFFF**:" + taskSnapshot.getMetadata().getName() + "   " + taskSnapshot.getMetadata().getSizeBytes() + "  " + taskSnapshot.getMetadata().getContentType());
                         MyActivite myActivite = new MyActivite();
                         myActivite.setDateActivity(String.valueOf(format.format(date)));
                         myActivite.setObjet(editTextObjet.getText().toString());
@@ -185,7 +184,6 @@ public class EnvoieCoursActivity extends AppCompatActivity {
                     FilList.add(File);
                     i++;
                 }
-                System.out.println("Test FilList.size()"+FilList.size());
                 Toast.makeText(this,"You have selected "+ FilList.size()+" Files", Toast.LENGTH_LONG).show();
             }
         }
