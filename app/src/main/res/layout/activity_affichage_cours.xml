@@ -22,7 +22,7 @@
                 android:layout_width="200dp"
                 android:layout_height="37dp"
                 android:layout_weight="1"
-                android:background="#FF9100"
+                android:background="#FF7043"
                 android:text="Deconnexion" />
         </LinearLayout>
 
