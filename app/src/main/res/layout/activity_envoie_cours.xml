@@ -137,15 +137,6 @@
                 android:layout_gravity="center">
 
 
-                <TextView
-                    android:id="@+id/textViewNotification"
-                    android:layout_width="124dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center|right"
-                    android:text="Aucune selection "
-                    android:textStyle="bold" />
-
                 <Button
                     android:id="@+id/buttonSelectFile"
                     android:layout_width="136dp"

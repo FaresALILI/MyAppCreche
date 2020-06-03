@@ -105,7 +105,7 @@ public class EnvoieCoursActivity extends AppCompatActivity {
         });
 
         fireAuth = FirebaseAuth.getInstance();
-        this.txtVwNotification =  findViewById(R.id.textViewNotification);
+        //this.txtVwNotification =  findViewById(R.id.textViewNotification);
         this.btnEnvoiCours.setOnClickListener(v->{
             if(this.editTextDesc.getText().toString().isEmpty() || this.editTextObjet.getText().toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(), "Merci de remplire  les parties ayant *",Toast.LENGTH_LONG).show();

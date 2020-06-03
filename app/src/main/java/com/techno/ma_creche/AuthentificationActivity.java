@@ -46,10 +46,10 @@ String userID;
             editmotpass=findViewById(R.id.editPass);
             cat.login=editlogin.getText().toString();
             cat.motpass=editmotpass.getText().toString();
-           // String login=editlogin.getText().toString();
-            //String motpass=editmotpass.getText().toString();
-            String   login ="lamine1305@gmail.com";
-            String  motpass="1234567";
+            String login=editlogin.getText().toString();
+            String motpass=editmotpass.getText().toString();
+            //String   login ="lamine1305@gmail.com";
+            //String  motpass="1234567";
             if(TextUtils.isEmpty(login)) {
                 this.editlogin.setError("le login doit etre renseigné");
                 return;
