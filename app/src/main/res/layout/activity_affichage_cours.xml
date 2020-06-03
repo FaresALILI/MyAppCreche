@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="593dp"
+        android:layout_height="623dp"
         android:background="@drawable/fondecran"
         android:orientation="vertical">
 
