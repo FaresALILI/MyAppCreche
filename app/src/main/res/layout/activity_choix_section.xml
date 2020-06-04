@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="#FFC400"
+            android:background="@drawable/btn_classe_ps"
             android:text="PS Classe 1"
             android:textSize="16sp" />
 
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="#FFC400"
+            android:background="@drawable/btn_classe_ps"
             android:text="PS Classe 2"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="#FFC400"
+            android:background="@drawable/btn_classe_ps"
             android:text="PS Classe 3"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="#6929FF"
+            android:background="@drawable/btn_classe_ms"
             android:text="MS Classe 1"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="#6929FF"
+            android:background="@drawable/btn_classe_ms"
             android:text="MS Classe 2"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="#6929FF"
+            android:background="@drawable/btn_classe_ms"
             android:text="MS Classe 3"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="#F5002D"
+            android:background="@drawable/btn_classe_gs"
             android:text="GS Classe 1"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="#F5002D"
+            android:background="@drawable/btn_classe_gs"
             android:text="GS Classe 2"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -100,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="#F5002D"
+            android:background="@drawable/btn_classe_gs"
             android:text="GS Classe 3"
             android:textSize="16sp"
             android:textStyle="bold" />

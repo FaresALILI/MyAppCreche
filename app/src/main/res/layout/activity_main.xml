@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2px"
                 android:layout_weight="1"
-                android:background="#70FF40"
+                android:background="@drawable/btn_par"
                 android:text="Je suis un parent"
                 android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2px"
                 android:layout_weight="1"
-                android:background="#FFA726"
+                android:background="@drawable/btn_ens"
                 android:text="Je suis un enseignant"
                 android:textStyle="bold" />
 

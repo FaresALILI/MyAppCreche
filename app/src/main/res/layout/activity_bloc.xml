@@ -20,7 +20,7 @@
         <TextView
 
             android:id="@+id/textViewClasse"
-            android:layout_width="208dp"
+            android:layout_width="338dp"
             android:layout_height="40dp"
             android:background="#D6FF43"
             android:gravity="center"
@@ -32,11 +32,10 @@
         <Button
             android:id="@+id/buttonDeconnexion"
             android:layout_width="80dp"
-
             android:layout_height="40dp"
-            android:layout_weight="2"
-            android:backgroundTint="#FF7043"
-            android:text="Deconnexion" />
+            android:background="@drawable/btn_decon"
+            android:foreground="@drawable/deconn"
+            android:text="" />
     </LinearLayout>
 
     <LinearLayout
@@ -239,6 +238,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/btn_taches"
             android:inputType="textVisiblePassword"
             android:text="Nouveau cours"
             android:visibility="visible" />

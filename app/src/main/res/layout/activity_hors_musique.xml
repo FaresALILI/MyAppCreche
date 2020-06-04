@@ -16,11 +16,12 @@
 
         <Button
             android:id="@+id/buttonDeconnexion"
-            android:layout_width="199dp"
-            android:layout_height="37dp"
-            android:layout_weight="1"
-            android:background="#FF7043"
-            android:text="Deconnexion" />
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_decon"
+            android:foreground="@drawable/deconn"
+            android:gravity="end"
+            android:text="" />
 
 
     </LinearLayout>
