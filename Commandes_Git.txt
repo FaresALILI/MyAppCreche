@@ -146,3 +146,19 @@ Pour créer un tag (étiquette <=> version(release)) dans une branche
 
 git push origine Nomdutag
 Pour pousser le tag Nomdutag (etiquette <=> version(release)) vers github.
+
+#############  commandes pour deplyer une application sur Andoyd Studio et palystor ################
+#############   Andoyd Studio  ################
+
+1. Dans Andoyd studio, il faut passer en mode release.
+2. Générer l'APK: Build->Build APKS-> Build APK
+3. se positioner avec CMD/gitbash sur le répertoir ou l'APK été généré exp: C:\Users\User\AndroidStudioProjects\MyAppCrechesV2\MyAppCreche\app\build\outputs\apk\release
+4. Faire attention pour cette étape: Génerer une seule fois les certeficats et surtout sauvegarder le certéficat et le mot de passe (pour les nouvelles mise à jours ou regénération d'APK, il ne faut pas relancer cette commande) :
+   keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+5. Signer l'APK généré avec la commande: jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key1.jks app-release-unsigned.apk my-alias  
+6. Ziper L'APK avec la commande: /c/Users/User/AppData/Local/Android/Sdk/build-tools/29.0.3/zipalign.exe -v 4 app-release-unsigned.apk MonAPK0606.apk  
+7. Verifier la signature de l'APK avec la commande: /c/Users/User/AppData/Local/Android/Sdk/build-tools/29.0.3/apksigner.bat verify MonAPK0606.apk.
+
+#############   Playe Stor  ################
+Suivre une vidéo déja exploiter par des utilisateur pour déployer dans playStor:
+exp: https://youtu.be/0naC_42iIxQ
