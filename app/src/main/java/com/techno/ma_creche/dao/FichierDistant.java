@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class FichierDistant implements Serializable {
     String link;
     String nomFile;ff
-    String typeActivity;
-    String extFile;
+    String typeActivity;ffdsg
+    String extFile;dssfdsgd
 
     public String getNomFile() {
         return nomFile;
