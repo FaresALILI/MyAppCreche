@@ -15,6 +15,7 @@ Afficher la version git.
 git config --global user.name "[nom]"
 git config --global user.email "[adresse email]"
 git config --list
+git config --global --list
 Configurer et editer les informations de l'utilisateur pour tous les dépôts locaux
 
 #############  init  ################
@@ -147,7 +148,7 @@ Pour créer un tag (étiquette <=> version(release)) dans une branche
 git push origine Nomdutag
 Pour pousser le tag Nomdutag (etiquette <=> version(release)) vers github.
 
-#############  commandes pour deplyer une application sur Andoyd Studio et palystor ################
+#############  commandes pour deplyer une application sur Andoyd Studio et palystore ################
 #############   Andoyd Studio  ################
 
 1. Dans Andoyd studio, il faut passer en mode release.
@@ -159,6 +160,6 @@ Pour pousser le tag Nomdutag (etiquette <=> version(release)) vers github.
 6. Ziper L'APK avec la commande: /c/Users/User/AppData/Local/Android/Sdk/build-tools/29.0.3/zipalign.exe -v 4 app-release-unsigned.apk MonAPK0606.apk  
 7. Verifier la signature de l'APK avec la commande: /c/Users/User/AppData/Local/Android/Sdk/build-tools/29.0.3/apksigner.bat verify MonAPK0606.apk.
 
-#############   Playe Stor  ################
+#############   PlayStore  ################
 Suivre une vidéo déja exploiter par des utilisateur pour déployer dans playStor:
 exp: https://youtu.be/0naC_42iIxQ
