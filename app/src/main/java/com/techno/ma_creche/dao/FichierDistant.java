@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class FichierDistant implements Serializable {
     String link;
-    String nomFile;
+    String nomFile;ff
     String typeActivity;
     String extFile;
 
