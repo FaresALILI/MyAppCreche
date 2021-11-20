@@ -26,7 +26,7 @@ initialiser un projet git,se positionner dans le repetoir du projet, clic droit 
 git add Commandes_Git
 git add .
 Ajouter les modification pour faire le commit. utilisé avec deux options soit avec le nom 
-du fichier modifié ou un point (.) pour tt less fichiers.
+du fichier modifié ou un point (.) pour tt les fichiers.
 
 #############  status  ##############
 git status
@@ -57,7 +57,7 @@ Permet de prendre une image de l'état du projet avant de pousser
 git remote add <name> <url>    
 
 Créer une connexion avec un dépôt distant. Après avoir ajouté un dépôt distant,
-vous pourrez utiliser <nom> comme raccourci pratique vers <url> dans d'autres commandes Git.
+vous pourrez utiliser <nom> comme raccourcis pratique vers <url> dans d'autres commandes Git.
 
 git remote -v
 Afficher les connexion distantes
@@ -73,23 +73,25 @@ git push [alias] [branche]
 git push
 Pousser le commit vers le depôt distant
 
-git push --set-upstream origin ma_branche 
-Céer une branche distante ma_branche
-
-#############  fetch   ##############
-git fetch
-Récupère tout l'historique du dépôt distant.
-
 git push origin --delete nom_branche_distante
 supprimer une branche distante
 
+git push --set-upstream origin ma_branche 
+Créer une branche distante ma_branche
+
+#############  fetch   ##############
+git fetch
+Récupère tout l'historique du dépôt distant mais ne se positionne pas dessus .
+
+
+
 git fetch --prune 
-Met aà jours l'historique des branches distant déja supprimer et visible en local. 
+Met à jours l'historique des branches distant déja supprimer et visible en local. 
 
 
 
 #############  pull  ################
-git pull
+git pull = git fetch + positionner sur ce dernier commit récupérer du distant
 Récupère tout l'historique et les modification du dépôt distant et mis à jours le depôt local.
 
 #############  branch  ##############
@@ -145,13 +147,24 @@ Pour afficher les tags (etiquette <=> version(release))
 git tag Nomdutag -m"monmessage"
 Pour créer un tag (étiquette <=> version(release)) dans une branche
 
-git push origine Nomdutag
+git push origin Nomdutag
 Pour pousser le tag Nomdutag (etiquette <=> version(release)) vers github.
 
-#############  commandes pour deplyer une application sur Andoyd Studio et palystore ################
-#############   Andoyd Studio  ################
+git push --tags 
+Pour pousser tout les tags qui sont en local
 
-1. Dans Andoyd studio, il faut passer en mode release.
+git tag -d monTag 
+Pour supprimer un tag loccal  monTag
+
+git push --delete origin monTag
+ou bien 
+git push origin :refs/tags/monTag
+Pour supprimer un tag distant monTag
+
+#############  commandes pour deplyer une application sur Android Studio et palystore ################
+#############   Android Studio  ################
+
+1. Dans android studio, il faut passer en mode release.
 2. Générer l'APK: Build->Build APKS-> Build APK
 3. se positioner avec CMD/gitbash sur le répertoir ou l'APK été généré exp: C:\Users\User\AndroidStudioProjects\MyAppCrechesV2\MyAppCreche\app\build\outputs\apk\release
 4. Faire attention pour cette étape: Génerer une seule fois les certeficats et surtout sauvegarder le certéficat et le mot de passe (pour les nouvelles mise à jours ou regénération d'APK, il ne faut pas relancer cette commande) :
